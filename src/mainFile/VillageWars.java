@@ -1,0 +1,12 @@
+package mainFile;
+
+public class VillageWars {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		//DUH.
+	}
+
+}

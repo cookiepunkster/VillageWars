@@ -1,0 +1,7 @@
+This is where all the intended sizes, colors, everything we need for the
+design or the game elements goes. Just add another class for what you think we should
+need for design purposes.
+
+If you couldn't get the function of this package. Read about the setter and getter functions.
+THis is intended to make our lives much easier when assigning different values
+for each design characteristic. Have fun.
