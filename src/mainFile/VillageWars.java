@@ -7,7 +7,11 @@ import gameLogic.conditions;
 public class VillageWars {
 
 	public static void main(String[] args) {
+		
+		System.out.println("UTOT MO JEZZA");
 	
+		
+		
 
 		  MainGameFrame frame1 = new MainGameFrame();
 
