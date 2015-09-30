@@ -15,6 +15,7 @@ public class VillageWars {
 
 		  MainGameFrame frame1 = new MainGameFrame();
 
+		  System.out.println("Igi");
 		  
 		  frame1.setDefaultLookAndFeelDecorated(true);
 		  frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
