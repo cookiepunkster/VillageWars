@@ -7,7 +7,7 @@ import gameLogic.conditions;
 public class VillageWars {
 
 	public static void main(String[] args) {
-		
+		System.out.println("Another trial");
 		  MainGameFrame frame1 = new MainGameFrame();
 		  
 		  frame1.setDefaultLookAndFeelDecorated(true);
