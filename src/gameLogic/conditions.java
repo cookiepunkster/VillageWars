@@ -73,7 +73,7 @@ public class conditions implements ActionListener {
 		removeT5 = frame2.getRemoveTroop5();
 		removeT6 = frame2.getRemoveTroop6();
 		removeT7 = frame2.getRemoveTroop7();
-		removeT8 = frame2.getRemoveTroop7();
+		removeT8 = frame2.getRemoveTroop8();
 	}
  
 	
@@ -358,9 +358,7 @@ public class conditions implements ActionListener {
 	
 	}
 	
-	 public String getName() {
-		    return playerName;
-		}
+	
 
 	
 
