@@ -7,6 +7,8 @@ public class VillageWars {
 
 		
 			System.out.println("Pakyu Jezza");
+            System.out.println("YEHEEEEEEEEY!!!");
+
 		//DUH.
 	}
 
