@@ -6,6 +6,7 @@ public class VillageWars {
 		// TODO Auto-generated method stub
 
 		
+			System.out.println("Pakyu Jezza");
 		//DUH.
 	}
 
