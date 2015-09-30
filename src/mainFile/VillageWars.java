@@ -5,8 +5,8 @@ public class VillageWars {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("SUBLUME MO MUKHA MO JEZZA");
-		
+		System.out.println("123456");
+		System.out.println("78910");
 			System.out.println("Pakyu Jezza");
             System.out.println("YEHEEEEEEEEY!!!");
 
