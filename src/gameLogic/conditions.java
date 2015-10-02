@@ -41,6 +41,7 @@ public class conditions implements ActionListener {
 	JButton button6HogRiderClicked;
 	JButton button7DragonClicked;
 	JButton button8WallClicked;
+	JButton positionTroops;
 	JPanel startPanel;
 	String playerName;
 	InitialFrame frame2 = new InitialFrame();
@@ -74,6 +75,8 @@ public class conditions implements ActionListener {
 		removeT6 = frame2.getRemoveTroop6();
 		removeT7 = frame2.getRemoveTroop7();
 		removeT8 = frame2.getRemoveTroop8();
+		positionTroops = frame2.getPositionButton();
+		count = frame2.getCount();
 	}
  
 	
@@ -90,8 +93,11 @@ public class conditions implements ActionListener {
 	{		
 		if(ae.getSource() == pButton)
 		{
-		//playerName = frame.getTextArea().getText();	
-			System.out.println("Play");
+			if(nameContainer.getText().trim().length() == 0){
+				JOptionPane.showMessageDialog(frame1,  "Please indicate your name!", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+			
+			else{
 			InitialFrame frame2 = new InitialFrame();
 			frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame2.setSize(1000, 700);
@@ -118,6 +124,9 @@ public class conditions implements ActionListener {
 		    
 		    frame2.getTextArea().setText(nameContainer.getText());
 		    
+		    frame2.getPositionButton().addActionListener(listener2);
+		
+			}
 		}
 		
 		if(ae.getSource() == button1BarbClicked)
@@ -374,6 +383,9 @@ public class conditions implements ActionListener {
 			goldsArea.setText(Integer.toString(golds));
 		}
 		
+		if(ae.getSource() == positionTroops){
+			
+		}
 	
 	}
 	

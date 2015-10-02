@@ -47,6 +47,7 @@ public class InitialFrame extends JFrame{
 	JTextArea countTroop7;
 	JTextArea countTroop8;
 	JButton attackButton;
+	JButton positionButton;
     int[] count = new int[8];
     
 	public InitialFrame(){
@@ -135,8 +136,16 @@ public class InitialFrame extends JFrame{
 		countTroop6 = new JTextArea(1, 6);
 		countTroop7 = new JTextArea(1, 6);
 	    countTroop8 = new JTextArea(1, 6);
-	 //   attackButton =  new JButton("Attack");
-	   // attackButton.setBounds(500, 500, 80, 60);
+		positionButton = new JButton("Set");
+		
+		countTroop1.setEditable(false);
+		countTroop2.setEditable(false);
+		countTroop3.setEditable(false);
+		countTroop4.setEditable(false);
+		countTroop5.setEditable(false);
+		countTroop6.setEditable(false);
+		countTroop7.setEditable(false);
+		countTroop8.setEditable(false);
 		
 	    troopPanel.add(button1Barb);
 	    troopPanel.add(button2Archer);
@@ -146,7 +155,7 @@ public class InitialFrame extends JFrame{
 	    troopPanel.add(button6HogRider);
 	    troopPanel.add(button7Dragon);
 	    troopPanel.add(button8Wall);
-	  //  troopPanel.add(attackButton);
+	    troopPanel.add(positionButton);
 	    
 	    removeTroop1 = new JButton("X");
 	    removeTroop1.setFont(new Font("Arial", Font.BOLD, 9));
@@ -183,37 +192,39 @@ public class InitialFrame extends JFrame{
 		attackButton = new JButton("Attack");
 	    	    
 //add the text area of count on the top of x button
+		countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop1);
-	    countPanel.add(Box.createHorizontalStrut(10));
+	    countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop2);
-	    countPanel.add(Box.createHorizontalStrut(10));	    
+	    countPanel.add(Box.createHorizontalStrut(13));	    
 	    countPanel.add(countTroop3);
-	    countPanel.add(Box.createHorizontalStrut(10));
+	    countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop4);
-	    countPanel.add(Box.createHorizontalStrut(10));
+	    countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop5);
-	    countPanel.add(Box.createHorizontalStrut(10));
+	    countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop6);
-	    countPanel.add(Box.createHorizontalStrut(10));
+	    countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop7);
-	    countPanel.add(Box.createHorizontalStrut(10));
+	    countPanel.add(Box.createHorizontalStrut(13));
 	    countPanel.add(countTroop8);
 	    countPanel.add(attackButton);
 	    
+	    removeTroopPanel.add(Box.createHorizontalStrut(5));
 	    removeTroopPanel.add(removeTroop1);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(63));
 		removeTroopPanel.add(removeTroop2);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(63));
 		removeTroopPanel.add(removeTroop3);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(63));
 		removeTroopPanel.add(removeTroop4);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(65));
 		removeTroopPanel.add(removeTroop5);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(63));
 		removeTroopPanel.add(removeTroop6);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(63));
 		removeTroopPanel.add(removeTroop7);
-		removeTroopPanel.add(Box.createHorizontalStrut(60));
+		removeTroopPanel.add(Box.createHorizontalStrut(65));
 		removeTroopPanel.add(removeTroop8);
 	    
 	    troopPanel.setBackground(Color.black);
@@ -275,6 +286,10 @@ public class InitialFrame extends JFrame{
 	  public JButton getButton8Wall() {
 		    return button8Wall;
 		}
+	  
+	  public JButton getPositionButton(){
+		  return positionButton;
+	  }
 	  
 	 public JTextArea getGoldArea()
 	 {
@@ -358,5 +373,9 @@ public class InitialFrame extends JFrame{
 	 public JButton getRemoveTroop8()
 	 {
 		 return removeTroop8;
+	 }
+	 
+	 public int[] getCount(){
+		 return count;
 	 }
 }

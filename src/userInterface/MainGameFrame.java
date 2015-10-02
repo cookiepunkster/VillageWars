@@ -41,7 +41,6 @@ public class MainGameFrame extends JFrame{
 		  menuButton.setBounds(490, 350, 100, 23);
 		  panel1.add(menuButton);
 		  setResizable(false);
-		  
 	  }
 	  
 	  public JButton getButton() {
