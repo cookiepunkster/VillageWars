@@ -94,7 +94,7 @@ public class conditions implements ActionListener {
 			System.out.println("Play");
 			InitialFrame frame2 = new InitialFrame();
 			frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame2.setSize(1000, 650);
+			frame2.setSize(1000, 700);
 			frame2.setLocationRelativeTo(null);
 			frame2.setVisible(true);
 		    conditions listener2 = new conditions(frame2);
@@ -303,63 +303,82 @@ public class conditions implements ActionListener {
 		if(ae.getSource() == removeT1){
 			if(count[0] != 0){
 				count[0]--;
+				golds = golds + 1;
 			}
 			countT1.setText(Integer.toString(count[0]));
+		    goldsArea.setText(Integer.toString(golds));
 		}
 		
 		if(ae.getSource() == removeT2){
 			if(count[1] != 0){
 				count[1]--;
+				golds = golds + 5;
 			}			
 			countT2.setText(Integer.toString(count[1]));
+			  goldsArea.setText(Integer.toString(golds));
+			
 		}
 		
 		if(ae.getSource() == removeT3){
 			if(count[2] != 0){
 				count[2]--;
+				golds = golds + 10;
 			}
 			countT3.setText(Integer.toString(count[2]));
+			  goldsArea.setText(Integer.toString(golds));
 		}
 		
 		if(ae.getSource() == removeT4){
 			if(count[3] != 0){
 				count[3]--;
+				golds = golds + 10;
 			}
 			countT4.setText(Integer.toString(count[3]));
+			  goldsArea.setText(Integer.toString(golds));
 		}
 		
 		if(ae.getSource() == removeT5){
 			if(count[4] != 0){
 				count[4]--;
+				golds = golds + 10;
 			}
 			countT5.setText(Integer.toString(count[4]));
+			  goldsArea.setText(Integer.toString(golds));
 		}
 		
 		if(ae.getSource() == removeT6){
 			if(count[5] != 0){
 				count[5]--;
+				golds = golds + 20;
 			}
 			countT6.setText(Integer.toString(count[5]));
+			  goldsArea.setText(Integer.toString(golds));
 		}
+		
 		
 		if(ae.getSource() == removeT7){
 			if(count[6] != 0){
 				count[6]--;
+				golds = golds + 30;
 			}
 			countT7.setText(Integer.toString(count[6]));
+			  goldsArea.setText(Integer.toString(golds));
 		}
 		
 		if(ae.getSource() == removeT8){
 			if(count[7] != 0){
 				count[7]--;
+				golds = golds + 1;
 			}
 			countT8.setText(Integer.toString(count[7]));
+			goldsArea.setText(Integer.toString(golds));
 		}
+		
 	
 	}
 	
 	
 
-	
+
 
 }

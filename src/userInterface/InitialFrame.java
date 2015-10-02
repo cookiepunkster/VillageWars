@@ -4,11 +4,8 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.Graphics;
 import javax.swing.border.Border;
-
 import gameLogic.conditions;
 import userInterface.MainGameFrame;
-
-
 
 public class InitialFrame extends JFrame{
     JButton selectTroops;
@@ -236,7 +233,7 @@ public class InitialFrame extends JFrame{
 		topPanel.setPreferredSize(new Dimension(1000, 30));   //width, height
         chatPanel.setPreferredSize(new Dimension(245, 600));
         villagePanel.setPreferredSize(new Dimension(200, 300));
-		bottomPanel.setPreferredSize(new Dimension(800, 120)); 
+		bottomPanel.setPreferredSize(new Dimension(800, 135)); 
 	
 		 add(chatPanel, BorderLayout.WEST);
 		 add(topPanel, BorderLayout.NORTH);

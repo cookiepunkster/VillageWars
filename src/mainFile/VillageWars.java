@@ -12,7 +12,7 @@ public class VillageWars {
 		  
 		  frame1.setDefaultLookAndFeelDecorated(true);
 		  frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  frame1.setSize(1000, 600);
+		  frame1.setSize(1000, 700);
 		  frame1.setLocationRelativeTo(null);
 		  frame1.setVisible(true);
 		  
