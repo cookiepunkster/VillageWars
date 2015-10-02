@@ -37,8 +37,8 @@ public class MainGameFrame extends JFrame{
 		  playButton = new JButton("Play");
 		  playButton.setBounds(420, 350, 70, 23);
 		  panel1.add(playButton);  //ADD TO THE PANEL
-		  menuButton = new JButton("Menu");
-		  menuButton.setBounds(490, 350, 70, 23);
+		  menuButton = new JButton("How to Play");
+		  menuButton.setBounds(490, 350, 100, 23);
 		  panel1.add(menuButton);
 		  setResizable(false);
 		  

@@ -180,6 +180,8 @@ public class InitialFrame extends JFrame{
 	    removeTroop8.setFont(new Font("Arial", Font.BOLD, 8));
 	    removeTroop8.setMargin(new Insets(1,1,3,3));
 	    
+		attackButton = new JButton("Attack");
+	    	    
 //add the text area of count on the top of x button
 	    countPanel.add(countTroop1);
 	    countPanel.add(Box.createHorizontalStrut(10));
@@ -196,7 +198,7 @@ public class InitialFrame extends JFrame{
 	    countPanel.add(countTroop7);
 	    countPanel.add(Box.createHorizontalStrut(10));
 	    countPanel.add(countTroop8);
-	    
+	    countPanel.add(attackButton);
 	    
 	    removeTroopPanel.add(removeTroop1);
 		removeTroopPanel.add(Box.createHorizontalStrut(60));
@@ -213,8 +215,6 @@ public class InitialFrame extends JFrame{
 		removeTroopPanel.add(removeTroop7);
 		removeTroopPanel.add(Box.createHorizontalStrut(60));
 		removeTroopPanel.add(removeTroop8);
-	    
-	    
 	    
 	    troopPanel.setBackground(Color.black);
 	    removeTroopPanel.setBackground(Color.black);
