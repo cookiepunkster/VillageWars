@@ -18,6 +18,8 @@ public class VillageWars {
 		  
 		  conditions listener1 = new conditions(frame1);
 		  frame1.getButton().addActionListener(listener1);
+		  frame1.getButton2().addActionListener(listener1);
+		  
 
 	}
 

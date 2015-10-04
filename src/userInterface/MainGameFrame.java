@@ -47,6 +47,10 @@ public class MainGameFrame extends JFrame{
 		    return playButton;
 		}
 	  
+	  public JButton getButton2(){
+		  return menuButton;
+	  }
+	  
 	  public JPanel getPanel() {
 		    return panel1;
 		}

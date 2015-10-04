@@ -5,15 +5,23 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.StyleContext;
 import java.io.*;
-import java.awt.Graphics;
+
 import userInterface.InitialFrame;
 import userInterface.MainGameFrame;
+import userInterface.mechanicsFrame;
 import mainFile.VillageWars;
 
 public class conditions implements ActionListener {
-
+	JButton home;
+	JPanel mechanicsCont;
+	CardLayout cl;
+	ImageIcon mechanics2;
+	JButton left;
+	JPanel getMech1;
+	JPanel getMech2;
 	JPanel panel2;
 	JButton pButton;
+	JButton hButton;
 	MainGameFrame frame1 = new MainGameFrame();
 	JTextArea nameContainer;
     JTextArea goldsArea;
@@ -47,7 +55,9 @@ public class conditions implements ActionListener {
 	InitialFrame frame2 = new InitialFrame();
 	 int[] count = new int[8];
 	 int golds = 100;
-	
+	mechanicsFrame frame3 = new mechanicsFrame();
+	JButton rightClicked;
+	JButton leftClicked;
 	public conditions(InitialFrame frame2)
 	{
 		button1BarbClicked = frame2.getButton1Barb();
@@ -78,16 +88,28 @@ public class conditions implements ActionListener {
 		positionTroops = frame2.getPositionButton();
 		count = frame2.getCount();
 	}
+	
+	public conditions(mechanicsFrame frame3){
+		leftClicked = frame3.getLeft();
+		rightClicked = frame3.getRight();
+		getMech1 = frame3.getMechanicsPanel1();
+		getMech2 = frame3.getMechanicsPanel2();
+		cl = frame3.getCl();
+		mechanicsCont = frame3.getCont();
+		home = frame3.getHome();
+	}
  
 	
 	public conditions(MainGameFrame frame1)
 	{
 		pButton = frame1.getButton();   //if pButton clicked
+		hButton = frame1.getButton2(); //if hButton clicked
 	//	playerName = frame1.getTextArea().getText();
 		nameContainer = frame1.getPlayerName();
 		startPanel =  frame1.getPanel();
 		
 	}
+	
 	
 	public void actionPerformed(ActionEvent ae)
 	{		
@@ -127,7 +149,29 @@ public class conditions implements ActionListener {
 		    frame2.getPositionButton().addActionListener(listener2);
 		
 			}
+		} else if(ae.getSource() == hButton){
+			mechanicsFrame frame3 = new mechanicsFrame();
+			frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame3.setSize(1000, 700);
+			frame3.setLocationRelativeTo(null);
+			frame3.setVisible(true);
+			conditions listener3 = new conditions(frame3);
+			frame3.getLeft().addActionListener(listener3);
+			frame3.getRight().addActionListener(listener3);
+			frame3.getHome().addActionListener(listener3);
+		}	
+		
+		if(ae.getSource() == rightClicked){
+			cl.show(mechanicsCont, "2");
 		}
+		
+		if(ae.getSource() == leftClicked){
+			cl.show(mechanicsCont, "1");
+		}
+		
+		/*if(ae.getSource() == home){
+			frame3.dispose();
+		}*/
 		
 		if(ae.getSource() == button1BarbClicked)
 		{
