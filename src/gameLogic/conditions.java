@@ -12,7 +12,7 @@ import userInterface.mechanicsFrame;
 import mainFile.VillageWars;
 
 public class conditions implements ActionListener {
-	JButton home;
+	//JButton home;
 	JPanel mechanicsCont;
 	CardLayout cl;
 	ImageIcon mechanics2;
@@ -96,7 +96,7 @@ public class conditions implements ActionListener {
 		getMech2 = frame3.getMechanicsPanel2();
 		cl = frame3.getCl();
 		mechanicsCont = frame3.getCont();
-		home = frame3.getHome();
+		//home = frame3.getHome();
 	}
  
 	
@@ -158,7 +158,7 @@ public class conditions implements ActionListener {
 			conditions listener3 = new conditions(frame3);
 			frame3.getLeft().addActionListener(listener3);
 			frame3.getRight().addActionListener(listener3);
-			frame3.getHome().addActionListener(listener3);
+			//frame3.getHome().addActionListener(listener3);
 		}	
 		
 		if(ae.getSource() == rightClicked){
@@ -170,7 +170,7 @@ public class conditions implements ActionListener {
 		}
 		
 		/*if(ae.getSource() == home){
-			frame3.dispose();
+			frame3.dispose(); di gumagana yung dispose pag nandito pero gumagana siya pag nasa mechanicsFrame.java
 		}*/
 		
 		if(ae.getSource() == button1BarbClicked)

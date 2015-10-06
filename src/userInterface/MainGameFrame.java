@@ -32,13 +32,13 @@ public class MainGameFrame extends JFrame{
 		   panel1.setLayout(null);
 		  
 		  nameTextArea = new JTextArea();       // Name of the player must be inserted here
-		  nameTextArea.setBounds(390, 318, 200, 25);
+		  nameTextArea.setBounds(415, 405, 200, 25);
 		  panel1.add(nameTextArea);
 		  playButton = new JButton("Play");
-		  playButton.setBounds(420, 350, 70, 23);
+		  playButton.setBounds(435, 435, 70, 23);
 		  panel1.add(playButton);  //ADD TO THE PANEL
 		  menuButton = new JButton("How to Play");
-		  menuButton.setBounds(490, 350, 100, 23);
+		  menuButton.setBounds(505, 435, 100, 23);
 		  panel1.add(menuButton);
 		  setResizable(false);
 	  }

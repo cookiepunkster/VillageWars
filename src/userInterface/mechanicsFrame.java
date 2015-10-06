@@ -7,6 +7,8 @@ import java.io.*;
 import javax.swing.border.Border;
 import gameLogic.conditions;
 import userInterface.MainGameFrame;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class mechanicsFrame extends JFrame {
 	
@@ -30,11 +32,16 @@ public class mechanicsFrame extends JFrame {
 		 mechanicsPanel1 = new JPanel();
 		 mechanicsPanel2 = new JPanel();
 		 home = new JButton("home");
-		 home.setBounds(438, 11, 95, 23);
+		 	home.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent arg0) {
+		 		dispose(); //di gumagana sa conditions.java kaya dito nalang muna
+		 	}
+		 });
+		 home.setBounds(438, 11, 95, 50);
 		 left = new JButton("prev");
-		 left.setBounds(899, 312, 95, 23);
+		 left.setBounds(899, 312, 95, 50);
 		 right = new JButton("next");
-		 right.setBounds(899, 312, 95, 23);
+		 right.setBounds(899, 312, 95, 50);
 		 mechanics1 = new ImageIcon(getClass().getResource("mechanics1.png"));
 		 mechanics2 = new ImageIcon(getClass().getResource("2mechanics.png"));
 
@@ -63,7 +70,7 @@ public class mechanicsFrame extends JFrame {
 		 mechanicsPanel1.add(right);
 		 mechanicsPanel2.setLayout(null);
 		 mechanicsPanel2.add(left);
-	//	 mechanicsPanel2.add(home);
+		 mechanicsPanel2.add(home);
 		 getContentPane().add(mechanicsContainer, BorderLayout.CENTER);
 		
 		
