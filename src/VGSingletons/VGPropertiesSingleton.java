@@ -74,9 +74,18 @@ public class VGPropertiesSingleton {
 		
 	}
 	
+	public int getmonsterMaxBuys(int troop)
+	{
+		return monsterMaxBuys[troop];
+	}
+	
 	public int getMonsterValues(int troop)
 	{
 		return monsterValues[troop];
+	}
+	
+	public String getMonsterName(int troop){
+		return monsterNames[troop];
 	}
 
 	public Dimension getFrameDimension() {

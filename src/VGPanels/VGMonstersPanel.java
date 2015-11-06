@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.*;
+
 import VGCustomClasses.*;
 import VGSingletons.VGPlayerSingleton;
 import VGSingletons.VGPropertiesSingleton;
@@ -22,6 +23,7 @@ public class VGMonstersPanel extends JPanel implements ActionListener {
 	 VGMonsterButton attackButton;
 	 JButton position = new JButton("Position");
 	 int[] count = new int[8];
+	 VGStatsPanel vgStatsObject = new VGStatsPanel();
 
 	public VGMonstersPanel() {
 		
@@ -151,35 +153,41 @@ private void setUpRemoveButtons(){
 	public void actionPerformed(ActionEvent e) {
 		
 		
-		   for(int i = 0; i<8; i++){
+		for(int i = 0; i<8; i++){
+			
+			if(e.getSource() == troop[i]){
 				
-				if(e.getSource() == troop[i]){
-				  if(VGPlayerSingleton.getInstance().getGoldCoins() != 0 )
-				  {
-					count[i]++; 
-					countTroop[i].setText(Integer.toString(count[i]));
-					VGPlayerSingleton.getInstance().minusGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
-					VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
-				  }
+				VGPlayerSingleton.getInstance().minusGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
+			  
+				if(VGPlayerSingleton.getInstance().getGoldCoins() < 0){
+					VGPlayerSingleton.getInstance().addGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
+					JOptionPane.showMessageDialog(vgStatsObject,  "Not enough gold!", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 				
-				if(e.getSource() == removeButton[i]){
-					if(VGPlayerSingleton.getInstance().getGoldCoins() > 0){
-						count[i]--;
-						countTroop[i].setText(Integer.toString(count[i]));
-						VGPlayerSingleton.getInstance().addGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
-						VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
-						countTroop[i].setText(Integer.toString(count[i]));
-					
+				else{
+					if(count[i] < VGPropertiesSingleton.getInstance().getmonsterMaxBuys(i)){
+						count[i]++; 
 					}
-					
 					else{
-						countTroop[i].setText(Integer.toString(0));
-						
+						VGPlayerSingleton.getInstance().addGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
+						JOptionPane.showMessageDialog(vgStatsObject, "You're maximum allowable number of " +VGPropertiesSingleton.getInstance().getMonsterName(i)+ " is " +VGPropertiesSingleton.getInstance().getmonsterMaxBuys(i), "Error", JOptionPane.WARNING_MESSAGE);
 					}
-				}
-				
+			  }
+				countTroop[i].setText(Integer.toString(count[i]));
+				VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
 			}
+			
+			if(e.getSource() == removeButton[i]){
+				if(count[i] != 0){
+					count[i]--;
+					VGPlayerSingleton.getInstance().addGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
+					VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
+					countTroop[i].setText(Integer.toString(count[i]));
+				
+				}
+			}
+			
+		}
 		   
 		   if(e.getSource() == position)
 		   {
