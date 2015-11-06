@@ -15,7 +15,7 @@ public class MainGameFrame extends JFrame{
 	ImageIcon image1;
 	JLabel label1;
 	JTextArea nameTextArea;
-	
+	JTextArea port;
 	  public MainGameFrame()  //constructor
 	  {
 		  super("Main Frame");
@@ -34,11 +34,15 @@ public class MainGameFrame extends JFrame{
 		  nameTextArea = new JTextArea();       // Name of the player must be inserted here
 		  nameTextArea.setBounds(415, 405, 200, 25);
 		  panel1.add(nameTextArea);
+		  port = new JTextArea();
+		  port.setText("                               port");
+		  port.setBounds(415, 435, 200, 25);
+		  panel1.add(port);
 		  playButton = new JButton("Play");
-		  playButton.setBounds(435, 435, 70, 23);
+		  playButton.setBounds(435, 465, 70, 23);
 		  panel1.add(playButton);  //ADD TO THE PANEL
 		  menuButton = new JButton("How to Play");
-		  menuButton.setBounds(505, 435, 100, 23);
+		  menuButton.setBounds(505, 465, 100, 23);
 		  panel1.add(menuButton);
 		  setResizable(false);
 	  }
