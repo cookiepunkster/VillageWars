@@ -70,12 +70,13 @@ public class VGFieldPanel extends JPanel {
 		
 		add(topPanel);
 		topPanel.add(labelTimer);
-		labelTimer.setText("Timer: 5:00");
+		timerTextArea.setText("5:00");
 		
 	
-		//panel1.add(timerTextArea);
+		topPanel.add(timerTextArea);
 		topPanel.add(labelHit);
 		topPanel.add(hitTextArea);
+		
 
 	}
 	
@@ -89,7 +90,7 @@ public class VGFieldPanel extends JPanel {
 				minute = (int) (TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60));
 				second = (int) (TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) * 60));
 		
-				labelTimer.setText("Timer: " + minute + ":" + second);
+				timerTextArea.setText(minute + ":" + second);
 				
 			}
 			
