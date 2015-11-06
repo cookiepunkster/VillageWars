@@ -55,7 +55,7 @@ public class VGFieldPanel extends JPanel {
 		topPanel.setPreferredSize(new Dimension(970, 35));  //width, height 
 		buttonsPanel.setPreferredSize(new Dimension(950, 480));
 		addTimer();
-		timerStart();
+		//timerStart();
 	    
 		add(topPanel, BorderLayout.NORTH);
 		add(buttonsPanel, BorderLayout.CENTER);
@@ -86,19 +86,21 @@ public class VGFieldPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				if(seconds==0){
+				((Timer)e.getSource()).stop();
+					System.out.println("timer stop!");
+				}else{
 				seconds--;
 				minute = (int) (TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60));
 				second = (int) (TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) * 60));
 		
 				timerTextArea.setText(minute + ":" + second);
-				
+				}
 			}
 			
 		}
 		
 		);
-		
-	
 		
 		timer.start();
 	}
@@ -176,8 +178,8 @@ public class VGFieldPanel extends JPanel {
 		 Random random = new Random();
 		 int randXA,randYA;
 		int timer;
-	
-			 while(buttonsValue[0][0] != 0)
+		timerStart();
+			 /*while(buttonsValue[0][0] != 0)
 			 {
 				  for(int m=0; m<8; m++)
 				  {
@@ -193,7 +195,7 @@ public class VGFieldPanel extends JPanel {
 					  }
 					
 				  }
-			 }
+			 }*/
 		
 	}
 	
