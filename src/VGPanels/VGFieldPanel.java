@@ -133,7 +133,7 @@ public class VGFieldPanel extends JPanel {
 		  System.out.print(count[i]+"_");
 	  }
 	  
-	  if(flag==0){
+	  if(flag==0){  //one time to position the tower hall
 			
 			
 		 	 randXT = random.nextInt(6) + 4;
@@ -144,33 +144,30 @@ public class VGFieldPanel extends JPanel {
 			buttons[randXT][randYT].setEnabled(true);
 			buttonsValue[randXT][randYT] = 8;
 			flag++;
-		  }
+		 
 		  
 	  
 	  System.out.println("");
 
 	 
-	  for(int m=0; m<8; m++)
-	  {
-		  for(int n=0; n< count[m]; n++)
-		  {
-			  randXB = random.nextInt(9) + 1;
-			  randYB = random.nextInt(9) + 1;
-			  
-			 if(buttonsValue[randXB][randYB] == 10 ){
-				  randXB = random.nextInt(9) + 1;
-				  randYB = random.nextInt(9) + 1;
-				 positionTroop(m, randXB, randYB); 
-			 } 
-			
-		  }
-		
+			  for(int m=0; m<8; m++)
+			  {
+				  for(int n=0; n< count[m]; n++)
+				  {
+					  randXB = random.nextInt(9) + 1;
+					  randYB = random.nextInt(9) + 1;
+					  
+					 if(buttonsValue[randXB][randYB] == 10 ){
+						  randXB = random.nextInt(9) + 1;
+						  randYB = random.nextInt(9) + 1;
+						 positionTroop(m, randXB, randYB); 
+					 } 
+					
+				  }
+				
+			  }
+				flag++;
 	  }
-	
-   
-	   
-	  
-	
 	  
    }
 	
