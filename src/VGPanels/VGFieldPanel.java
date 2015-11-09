@@ -86,6 +86,10 @@ public class VGFieldPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				 int troop[] = VGPlayerSingleton.getInstance().getPlayerTroops();
+				 Random random = new Random();
+				 int randXA,randYA;
+				
 				if(seconds==0){
 				((Timer)e.getSource()).stop();
 					System.out.println("timer stop!");
@@ -95,6 +99,22 @@ public class VGFieldPanel extends JPanel {
 				second = (int) (TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) * 60));
 		
 				timerTextArea.setText(minute + ":" + second);
+				 
+					  for(int m=0; m<8; m++)
+					  {
+						  for(int n=0; n< troop[m]; n++)
+						  {
+							  randXA = random.nextInt(9) + 1;
+							  randYA = random.nextInt(9) + 1;
+							  
+							  attackTroop(m, randXA, randYA); 
+							  //buttons[randXB][randYB].setBackground(new JButton().getBackground());
+							 
+							
+						  }
+						
+					  }
+			
 				}
 			}
 			
@@ -174,28 +194,9 @@ public class VGFieldPanel extends JPanel {
    }
 	
 	public void attack() {
-		 int troop[] = VGPlayerSingleton.getInstance().getPlayerTroops();
-		 Random random = new Random();
-		 int randXA,randYA;
-		int timer;
+		
 		timerStart();
-			 /*while(buttonsValue[0][0] != 0)
-			 {
-				  for(int m=0; m<8; m++)
-				  {
-					  for(int n=0; n< troop[m]; n++)
-					  {
-						  randXA = random.nextInt(9) + 1;
-						  randYA = random.nextInt(9) + 1;
-						  
-						  attackTroop(m, randXA, randYA); 
-						//  buttons[randXB][randYB].setBackground(new JButton().getBackground());
-						 
-						
-					  }
-					
-				  }
-			 }*/
+			
 		
 	}
 	
