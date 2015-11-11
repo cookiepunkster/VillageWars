@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import java.util.*;
 import javax.swing.Timer;
 import java.util.concurrent.TimeUnit;
+
+import VGSingletons.VGGameSingleton;
 import VGSingletons.VGPlayerSingleton;
 import VGSingletons.VGPropertiesSingleton;
 import java.awt.event.ActionEvent;
@@ -20,6 +22,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import VGSingletons.VGPlayerSingleton;
+import VGSingletons.VGPropertiesSingleton;
 
 public class VGFieldPanel extends JPanel {
 	
@@ -27,13 +31,11 @@ public class VGFieldPanel extends JPanel {
 	private JPanel topPanel;
 	private JButton[][] buttons = new JButton[10][10];
 	private int[][] buttonsValue = new int[10][10];
+	private int[][] visitedValue = new int[10][10];
 	private JLabel labelTimer = new JLabel("Timer: ");
 	private JLabel labelHit = new JLabel("Hit Count: ");
-	private JLabel labelHealth = new JLabel("Health Status: ");
-	private JLabel labelOpponent = new JLabel("Opponent: ");
 	private JTextArea timerTextArea = new JTextArea(1,10);
 	private JTextArea hitTextArea = new JTextArea(1,10);
-	private JTextArea healthTextArea = new JTextArea(1,10);
 	int flag = 0;
 	int randXT;
 	int randYT;
@@ -41,7 +43,7 @@ public class VGFieldPanel extends JPanel {
 	int seconds = 300;
 	int minute;
 	int second;
-
+    
 
 	public VGFieldPanel() {
 		
@@ -55,13 +57,12 @@ public class VGFieldPanel extends JPanel {
 		topPanel.setPreferredSize(new Dimension(970, 35));  //width, height 
 		buttonsPanel.setPreferredSize(new Dimension(950, 480));
 		addTimer();
-		//timerStart();
-	    
 		add(topPanel, BorderLayout.NORTH);
 		add(buttonsPanel, BorderLayout.CENTER);
 		
 		setBackground(Color.GREEN);
 		setButtons();
+		init_visited();
 		
 	}
 	
@@ -71,13 +72,20 @@ public class VGFieldPanel extends JPanel {
 		add(topPanel);
 		topPanel.add(labelTimer);
 		timerTextArea.setText("5:00");
-		
-	
 		topPanel.add(timerTextArea);
 		topPanel.add(labelHit);
 		topPanel.add(hitTextArea);
 		
 
+	}
+	
+	public void init_visited()
+	{
+		for(int i=0; i<10; i++){
+			for(int j=0; j<10; j++){
+				visitedValue[i][j] = 10;
+			}
+		}
 	}
 	
 	public void timerStart(){
@@ -93,6 +101,7 @@ public class VGFieldPanel extends JPanel {
 				if(seconds==0){
 				((Timer)e.getSource()).stop();
 					System.out.println("timer stop!");
+					//printVisitedArray();
 				}else{
 				seconds--;
 				minute = (int) (TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60));
@@ -105,9 +114,10 @@ public class VGFieldPanel extends JPanel {
 						  for(int n=0; n< troop[m]; n++)
 						  {
 							  randXA = random.nextInt(9) + 1;
-							  randYA = random.nextInt(9) + 1;
+							  randYA = random.nextInt(9) + 0;
 							  
-							  attackTroop(m, randXA, randYA); 
+							   attackTroop(m, n, randXA, randYA); 
+							  //  VGGameSingleton.getInstance().printDefenderHealth();
 							  //buttons[randXB][randYB].setBackground(new JButton().getBackground());
 							 
 							
@@ -123,13 +133,13 @@ public class VGFieldPanel extends JPanel {
 		);
 		
 		timer.start();
+		//VGGameSingleton.getInstance().AttackerHealth();
 	}
 	
 	private void setButtons() {
 		
 		for(int i = 0 ; i<10 ; i+=1)
 		{
-			
 			for(int j = 0 ; j<10 ; j+=1)
 			{
 				
@@ -137,7 +147,6 @@ public class VGFieldPanel extends JPanel {
 				buttons[i][j].setEnabled(false);
 				buttonsValue[i][j] = 10;
 				buttonsPanel.add(buttons[i][j]);
-				
 				
 			}
 			
@@ -167,37 +176,46 @@ public class VGFieldPanel extends JPanel {
 			buttonsValue[randXT][randYT] = 8;
 			flag++;
 		 
-		  
-	  
 	  System.out.println("");
-
-	 
 			  for(int m=0; m<8; m++)
 			  {
 				  for(int n=0; n< count[m]; n++)
 				  {
-					  randXB = random.nextInt(9) + 1;
-					  randYB = random.nextInt(9) + 1;
+					  randXB = random.nextInt(9) + 0;
+					  randYB = random.nextInt(9) + 0;
 					  
 					 if(buttonsValue[randXB][randYB] == 10 ){
 						  randXB = random.nextInt(9) + 1;
 						  randYB = random.nextInt(9) + 1;
 						 positionTroop(m, randXB, randYB); 
+						 VGGameSingleton.getInstance().defenderTroopHealth(m, randXB, randYB);
 					 } 
 					
 				  }
 				
 			  }
+			  
 				flag++;
-	  }
-	  
+	     } //end to flag
+	 
    }
-	
+   
+   
+   public void printPositionArray()
+   {
+	   for(int i=0; i<10; i++)
+	   {
+		 for(int j=0; j<10; j++)
+		 {
+			  System.out.print(buttonsValue[i][j]);
+		 }
+		 System.out.println();
+	   }
+   }
+   
 	public void attack() {
-		
+		VGGameSingleton.getInstance().attackerHealth();
 		timerStart();
-			
-		
 	}
 	
 	public void reset()
@@ -223,53 +241,92 @@ public class VGFieldPanel extends JPanel {
 	
 	public void positionTroop(int monster, int x, int y)
 	{
-		
 	    ImageIcon troop = new ImageIcon(getClass().getResource(monster+".png"));  //insert picture in a button
 				buttons[x][y].setIcon(troop);
 				buttons[x][y].setEnabled(true);
 				buttonsValue[x][y] = monster;
-		/* switch(monster){
-		    case 0: buttons[x][y].setBackground(Color.YELLOW);
-		  			break;
-		    case 1: buttons[x][y].setBackground(Color.PINK);
-		    		break;
-		    case 2: buttons[x][y].setBackground(Color.ORANGE);
-		    		break;
-		    case 3: buttons[x][y].setBackground(Color.WHITE);
-		       		break;
-		    case 4: buttons[x][y].setBackground(Color.BLUE);
-		    		break;
-		    case 5: buttons[x][y].setBackground(Color.BLACK);
-		    		break;
-		    case 6: buttons[x][y].setBackground(Color.MAGENTA);
-		    		break;
-		    case 7: buttons[x][y].setBackground(Color.RED);
-		    		break;
-	    }*/
 	}
 	
-	public void attackTroop(int troop, int x, int y)
+	public void attackTroop(int troop, int counter, int x, int y)
 	{
 		switch(troop){
 	    case 0: buttons[x][y].setBackground(Color.YELLOW);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	  			break;
 	    case 1: buttons[x][y].setBackground(Color.PINK);
+			    updateStates(troop, counter, buttonsValue[x][y], x, y);
 	    		break;
 	    case 2: buttons[x][y].setBackground(Color.ORANGE);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	    		break;
 	    case 3: buttons[x][y].setBackground(Color.WHITE);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	       		break;
 	    case 4: buttons[x][y].setBackground(Color.BLUE);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	    		break;
 	    case 5: buttons[x][y].setBackground(Color.BLACK);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	    		break;
 	    case 6: buttons[x][y].setBackground(Color.MAGENTA);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	    		break;
 	    case 7: buttons[x][y].setBackground(Color.RED);
+	    		updateStates(troop, counter, buttonsValue[x][y], x, y);
 	    		break;
         }
 
 	}
+	
+	public void updateStates(int AttackerTroop, int counter, int DefenderTroop, int x, int y)
+	{
+		int attackerTroopValue;
+		int defenderTroopValue;
+		int currentAttackerTroopHealth;
+		int currentDefenderTroopHealth;
+	
+		currentAttackerTroopHealth = VGGameSingleton.getInstance().getAttackerTroopHealth(AttackerTroop,counter); 
+		currentDefenderTroopHealth = VGGameSingleton.getInstance().getDefenderTroopHealth(x,y);
+		
+		if(DefenderTroop == 8)  //It means that this is a tower
+		{
+			VGPlayerSingleton.getInstance().addHitCount();
+			hitTextArea.setText(Integer.toString(VGPlayerSingleton.getInstance().getHitCount()));
+		}
+				else{
+			   
+				//System.out.println("currentDefenderTroopHealth: "+currentDefenderTroopHealth);
+				if(currentDefenderTroopHealth != 0)
+				{
+					attackerTroopValue = VGGameSingleton.getInstance().getTroopValues(AttackerTroop);
+					defenderTroopValue = VGGameSingleton.getInstance().getTroopValues(DefenderTroop);
+				    if(attackerTroopValue < defenderTroopValue)
+							{		
+									VGGameSingleton.getInstance().minusDefenderTroopHealth(currentAttackerTroopHealth, currentDefenderTroopHealth, x,y);
+									VGGameSingleton.getInstance().updateAttackerHealth(AttackerTroop, counter, 0);
+									VGPlayerSingleton.getInstance().addGoldCoins(attackerTroopValue);
+									VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
+							}
+							
+					 else if(attackerTroopValue > defenderTroopValue)
+							{
+								    VGGameSingleton.getInstance().minusAttackerTroopHealth(currentAttackerTroopHealth, currentDefenderTroopHealth, AttackerTroop, counter);
+								    VGGameSingleton.getInstance().updateDefenderHealth(x, y, 0);
+								    VGPlayerSingleton.getInstance().addGoldCoins(defenderTroopValue);
+								    VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
+							}
+							
+							else{    //attackerTroopValue == DefenderTroopValue
+								VGGameSingleton.getInstance().updateAttackerHealth(AttackerTroop, counter, 0);
+								 VGGameSingleton.getInstance().updateDefenderHealth(x, y, 0);
+								 VGPlayerSingleton.getInstance().addGoldCoins(attackerTroopValue);
+								 VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
+							} 
+				}
+		}
+	}
+	
+	
 	
 	public Dimension getPreferredSize() {
 		

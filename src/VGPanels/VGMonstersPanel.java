@@ -36,30 +36,6 @@ public class VGMonstersPanel extends JPanel implements ActionListener {
 		setUpRemoveButtons();
 	
 		
-	/*	JButton button = new JButton("attack");
-		button.addActionListener(this);
-		add(button);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.YELLOW);
-		//add(panel,BorderLayout.CENTER);
-		
-		panel.setLayout(new GridLayout(2,2));
-		
-		for(int i = 0 ; i<4 ; i+=1)
-		{
-			JPanel p = new JPanel();
-			
-			if(i%2 == 0)
-				p.setBackground(Color.BLUE);
-			else {
-				p.setBackground(Color.CYAN);
-			}
-			
-			panel.add(p);
-		}
-		
-		//System.out.println("Size: "+this.size()); */
 		
 	}
 	
@@ -110,27 +86,35 @@ private void setUpRemoveButtons(){
 		int i=0;
 		    ImageIcon barb = new ImageIcon(getClass().getResource("barb.png"));  //insert picture in a button
 		    troop[0] = new JButton(barb);
+		    troop[0].setBackground(Color.YELLOW);
 		    
 		    ImageIcon archer = new ImageIcon(getClass().getResource("archer.png"));
 		    troop[1] = new JButton(archer);
+		    troop[1].setBackground(Color.PINK);
 		    
 		    ImageIcon giant= new ImageIcon(getClass().getResource("giant.png"));
 		    troop[2] = new JButton(giant);
-		 
+		    troop[2].setBackground(Color.ORANGE);
+		    
 		    ImageIcon wallbreaker= new ImageIcon(getClass().getResource("wallbreaker.png"));
 		    troop[3] = new JButton(wallbreaker);
+		    troop[3].setBackground(Color.WHITE);
 		    
 		    ImageIcon wizard= new ImageIcon(getClass().getResource("wizard.png"));
 		    troop[4] = new JButton(wizard);
+		    troop[4].setBackground(Color.BLUE);
 		    
 		    ImageIcon hogrider= new ImageIcon(getClass().getResource("hogrider.png"));
 		    troop[5] = new JButton(hogrider);
+		    troop[5].setBackground(Color.BLACK);
 		    
 		    ImageIcon dragon= new ImageIcon(getClass().getResource("dragon.png"));
 		    troop[6] = new JButton(dragon);
+		    troop[6].setBackground(Color.MAGENTA);
 		    
 		    ImageIcon wall= new ImageIcon(getClass().getResource("wall.png"));
 		    troop[7] = new JButton(wall);
+		    troop[7].setBackground(Color.RED);
 
 			for(i=0; i<8; i++)
 			{
@@ -192,7 +176,6 @@ private void setUpRemoveButtons(){
 		   if(e.getSource() == position)
 		   {
 			   VGPlayerSingleton.getInstance().setPlayerTroops(count);
-				  
 			   VGPropertiesSingleton.getInstance().getFieldPanel().position();
 		   }
 		   

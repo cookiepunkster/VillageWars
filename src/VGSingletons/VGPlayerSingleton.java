@@ -13,6 +13,7 @@ public class VGPlayerSingleton {
 	
 	private int level = 0;
 	private int goldcoins = 100;
+	private int hitCount = 0;
 	private int[] playerTroops = new int[8];
 	
 	
@@ -50,6 +51,11 @@ public class VGPlayerSingleton {
 		this.name = name;
 		this.serverIPaddress = serverIPaddress;
 		
+	}
+	
+	public void addHitCount()
+	{
+		hitCount = hitCount + 1;
 	}
 	
 	public void updateLevel(int levelUpdate) {
@@ -91,6 +97,11 @@ public class VGPlayerSingleton {
 		
 		return goldcoins;
 		
+	}
+	
+	public int getHitCount()
+	{
+		return hitCount;
 	}
 	
 	public String getPlayerName() {

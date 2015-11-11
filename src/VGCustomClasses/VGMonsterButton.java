@@ -18,7 +18,7 @@ public class VGMonsterButton extends JButton {
 		setText(monsterName);
 		setSize(VGPropertiesSingleton.getInstance().getMonsterButtonSizes());
 		
-		setBackground(Color.RED);
+		//setBackground(Color.RED);
 		
 	}
 	
