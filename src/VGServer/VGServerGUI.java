@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
+import VGCustomClasses.VGServerUDP;
 
 public class VGServerGUI extends JFrame implements ActionListener {
 
@@ -100,6 +102,15 @@ public class VGServerGUI extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent event) {
+		/*
+		try {
+			new VGServerUDP();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
 		
 		if(server != null)
 		{

@@ -7,6 +7,7 @@ import java.util.*;
 import VGFrames.VGGameFrame;
 import VGFrames.VGMainFrame;
 import VGPanels.VGChatPanel;
+import VGSingletons.VGPropertiesSingleton;
 
 public class VGGameClient {
 	
@@ -108,7 +109,7 @@ public class VGGameClient {
 				try {
 					
 					String msg = (String) sInput.readObject();
-					//.updateEntry(msg);
+					VGPropertiesSingleton.getInstance().getChatPanel().updateEntry(msg);
 					
 				} catch (IOException e) {
 					break;

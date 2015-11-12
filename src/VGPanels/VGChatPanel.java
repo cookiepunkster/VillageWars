@@ -43,6 +43,8 @@ public class VGChatPanel extends JPanel {
 					
 					if(VGPlayerSingleton.getClient().sendMessage(new ChatMessage(ChatMessage.MESSAGE, chatEntry.getText())));
 					{
+					
+						chatLog.append(chatEntry.getText());
 						
 						System.out.println("SUCCESS!");
 						chatEntry.setText("");
