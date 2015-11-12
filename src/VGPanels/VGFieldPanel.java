@@ -40,11 +40,12 @@ public class VGFieldPanel extends JPanel {
 	private JLabel labelHit = new JLabel("Hit Count: ");
 	private JTextArea timerTextArea = new JTextArea(1,10);
 	private JTextArea hitTextArea = new JTextArea(1,10);
+	VGClientUDP clientUDP = new VGClientUDP();
 	int flag = 0;
 	int randXT;
 	int randYT;
 	int timer;
-	int seconds = 300;
+	int seconds = 10;
 	int minute;
 	int second;
     
@@ -203,17 +204,19 @@ public class VGFieldPanel extends JPanel {
 	     } //end to flag
 	  VGGameSingleton.getInstance().setTroopInPosition(buttonsValue);
 	  
-	   VGClientUDP a = new VGClientUDP();
+	  
 		try {
-			a.cRun();
+			clientUDP.cRun();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
+	//  printPositionValues();
 	   
 	  
    }
    
+ 
    
    public void printPositionArray()
    {
@@ -230,6 +233,13 @@ public class VGFieldPanel extends JPanel {
 	public void attack() {
 		VGGameSingleton.getInstance().attackerHealth();
 		timerStart();
+		try {
+			clientUDP.attack();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void reset()

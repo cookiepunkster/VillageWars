@@ -6,7 +6,8 @@ import java.util.Arrays;
 import VGSingletons.*;
 
 public class VGClientUDP {   
-	String data;
+	String data1;
+	String data2;
 	String monsterCount;
 	int[] monsterPerCount = new int[8];
 	String playerLevel;
@@ -24,8 +25,8 @@ public class VGClientUDP {
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data = getTheDataFromTheClient();
-	     sendData = data.getBytes();       
+	     data1 = getTheDataFromTheClient();
+	     sendData = data1.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
@@ -34,6 +35,38 @@ public class VGClientUDP {
 	     System.out.println("FROM SERVER:" + modifiedSentence);              
 	     clientSocket.close();    
 	    
+	}
+	
+	public void attack() throws IOException{
+		monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
+		String countPerTroop;
+		// System.out.println("FROM CLIENT");
+		 DatagramSocket clientSocket = new DatagramSocket();   
+		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
+		 byte[] sendData1 = new byte[1024];       
+		 byte[] receiveData1 = new byte[1024];   
+	     data2 = getTheIPandName();
+	     sendData1 = data2.getBytes();       
+		 DatagramPacket sendPacket1 = new DatagramPacket(sendData1, sendData1.length, IPAddress, 9877);       
+		 clientSocket.send(sendPacket1);       
+		 DatagramPacket receivePacket = new DatagramPacket(receiveData1, receiveData1.length);     
+		 clientSocket.receive(receivePacket);       
+	     String modifiedSentence = new String(receivePacket.getData());      
+	     System.out.println("FROM SERVER:" + modifiedSentence);              
+	     clientSocket.close();  
+	}
+	
+	public String getTheIPandName()
+	{
+		String pname;
+		String ipAddress;
+		String sentence;
+		
+		pname = VGPlayerSingleton.getInstance().getPlayerName();
+		ipAddress = VGPlayerSingleton.getInstance().getIPaddress();
+	
+		sentence = pname + ipAddress;
+		return sentence;
 	}
 	
 	public String getTheDataFromTheClient()
