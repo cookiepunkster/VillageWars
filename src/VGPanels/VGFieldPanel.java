@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,7 +26,15 @@ import VGSingletons.VGPlayerSingleton;
 import VGSingletons.VGPropertiesSingleton;
 
 public class VGFieldPanel extends JPanel {
-	
+	//for trial lang
+	String sentence;
+	String monsterCount;
+	int[] monsterPerCount = new int[8];
+	String playerLevel;
+	String playerCoin;
+	String playerName;
+	int troopInPosition[][] = new int[10][10];
+	//
 	private JPanel buttonsPanel;
 	private JPanel topPanel;
 	private JButton[][] buttons = new JButton[10][10];
@@ -101,7 +109,7 @@ public class VGFieldPanel extends JPanel {
 				if(seconds==0){
 				((Timer)e.getSource()).stop();
 					System.out.println("timer stop!");
-					//printVisitedArray();
+					
 				}else{
 				seconds--;
 				minute = (int) (TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60));
@@ -167,8 +175,8 @@ public class VGFieldPanel extends JPanel {
 	  if(flag==0){  //one time to position the tower hall
 			
 			
-		 	 randXT = random.nextInt(6) + 4;
-			 randYT = random.nextInt(6) + 4;
+		 	 randXT = random.nextInt(10) + 0;
+			 randYT = random.nextInt(10) + 0;
 			
 		    ImageIcon tower = new ImageIcon(getClass().getResource("tower.png"));  //insert picture in a button
 			buttons[randXT][randYT].setIcon(tower);
@@ -183,10 +191,9 @@ public class VGFieldPanel extends JPanel {
 				  {
 					  randXB = random.nextInt(9) + 0;
 					  randYB = random.nextInt(9) + 0;
-					  
 					 if(buttonsValue[randXB][randYB] == 10 ){
-						  randXB = random.nextInt(9) + 1;
-						  randYB = random.nextInt(9) + 1;
+						  randXB = random.nextInt(10) + 0;
+						  randYB = random.nextInt(10) + 0;
 						 positionTroop(m, randXB, randYB); 
 						 VGGameSingleton.getInstance().defenderTroopHealth(m, randXB, randYB);
 					 } 
@@ -197,9 +204,132 @@ public class VGFieldPanel extends JPanel {
 			  
 				flag++;
 	     } //end to flag
+	  
+	    VGGameSingleton.getInstance().setButtonsValue(buttonsValue);
+	   // printPositionValues();
 	 
    }
+ 
+ /*  public void printPositionValues()   //THIS IS JUST A BACKUP
+   {
+		 monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
+	     playerName = VGPlayerSingleton.getInstance().getPlayerName();
+		 playerLevel = Integer.toString(VGPlayerSingleton.getInstance().getLevel());
+		// monsterCount = Arrays.toString(monsterPerCount);
+		 playerCoin = Integer.toString(VGPlayerSingleton.getInstance().getGoldCoins());
+		 troopInPosition = VGGameSingleton.getInstance().getTroopInPosition();
+		 
+		 String troopData="";
+		 for(int m=0; m<8; m++)
+		 {
+			 troopData = troopData + monsterPerCount[m]+",";
+		 }
+		 
+		// System.out.println("TROOP DATA"+troopData);
+		//PASS THE DATA TO THE SERVER - THE SEQUENCE IS THIS - pName, levelNo, int monsterCount, int goldCount, int[][] defenderTroop
+		 sentence = playerName+"_"+playerLevel+"_"+troopData+"_"+playerCoin;
+		 
+		 String sentence1 = "_";
+		 String separator = "";
+		 
+		 for(int i=0; i<10; i++){
+			// sentence1 = sentence1+"/";
+			 for(int j=0; j<10; j++){
+				   sentence1 = sentence1 +(Integer.toString(troopInPosition[i][j]))+",";
+			 }
+			 sentence1 = sentence1+"/";
+		 }
+		 
+		 sentence = sentence + sentence1;
+		 System.out.println("Here's the data to be passed:"+sentence);
+		 
+		 separateTheValues(sentence);
+   }
    
+   public void separateTheValues(String sentence1)
+   {
+	   String pName = "";
+	   int levelNumber;
+	   int playerGold;
+	   int[] count = new int[8];
+	   int[][] positionValue = new int[10][10];
+	   String countArray;
+	   System.out.println("Separate the values!");
+	   String[] receivedData = sentence1.split("_");
+	   String[] dataFromClient = new String[receivedData.length];
+	   for(int i=0; i< receivedData.length; i++)
+	   {
+		      String data =  receivedData[i];
+		      dataFromClient[i] = data;
+	   }
+	   
+	   
+	   for(String i : dataFromClient)
+	   {
+		   System.out.println(i);
+	   }
+	   
+	   System.out.println("Convert each one");
+	   System.out.println();
+
+	   pName = dataFromClient[0];
+	   levelNumber = Integer.parseInt(dataFromClient[1]);
+	   
+	   String[] troops = dataFromClient[2].split(",");
+	   int[] troopCount = new int[troops.length];
+	   for(int i=0; i< troops.length; i++)
+	   {
+		    int perMonster = Integer.parseInt(troops[i]);
+		    troopCount[i] = perMonster;
+	   }
+		   
+		   
+	   playerGold = Integer.parseInt(dataFromClient[3]);
+	   
+	   String[] positionPer10 = dataFromClient[4].split("/");
+	   String[] positionArray = new String[positionPer10.length];
+	   for(int n=0; n< positionPer10.length; n++)
+	   {
+		   String rowArray = positionPer10[n];
+		    positionArray[n] = rowArray;
+	   }
+
+	   System.out.println("Player name: "+pName);
+
+	   System.out.println("Level:"+levelNumber);
+	   
+	   for(int i : troopCount)
+	   {
+		   System.out.print(i);
+	   }
+	   
+	   System.out.println();
+	   System.out.println("Player's Gold: "+playerGold);
+	   
+	
+	   //SEPARATE them
+	   for(int i=0; i<positionArray.length; i++)
+	   {
+		   String[] perArray = positionArray[i].split(",");
+		   int[][] valueInArray = new int[positionArray.length][perArray.length];
+		 
+		   for(int j=0; j<perArray.length; j++ )
+		   {
+			   positionValue[i][j] = Integer.parseInt(perArray[j]);
+		   }
+	   }
+	   
+	   System.out.println("PRINT POSITION VALUES");
+	   for(int i=0; i<10; i++)
+	   {
+		   for(int j=0; j<10; j++)
+		   {
+			   System.out.print(positionValue[i][j]+" ");
+		   }
+		   System.out.println();
+	   }
+	   
+   } */
    
    public void printPositionArray()
    {

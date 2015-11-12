@@ -57,8 +57,6 @@ public class VGMonstersPanel extends JPanel implements ActionListener {
 			    add(countTroop[i]);
 			}
 			
-			
-		 //   goldTextArea.setText(Integer.toString(coins));
 		 position.addActionListener(this);
 		 add(position);
 			
@@ -175,8 +173,17 @@ private void setUpRemoveButtons(){
 		   
 		   if(e.getSource() == position)
 		   {
+			
 			   VGPlayerSingleton.getInstance().setPlayerTroops(count);
 			   VGPropertiesSingleton.getInstance().getFieldPanel().position();
+			 /*  VGClientUDP client = new VGClientUDP();
+			   try {
+				client.cRun();
+			   } catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			   } */
+			   
 		   }
 		   
 		   if(e.getSource() == attackButton)
