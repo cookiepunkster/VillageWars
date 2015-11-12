@@ -3,29 +3,27 @@ package VGCustomClasses;
 import java.io.*; 
 import java.net.*;
 import java.util.Arrays; 
-import VGSingletons.*;
-
 public class VGClientUDP {   
-	String data;
+	String sentence;
 	String monsterCount;
-	int[] monsterPerCount = new int[8];
+	int[] monsterPerCountReceived = new int[8];
 	String playerLevel;
 	String playerCoin;
-	String playerName;
-	int troopInPosition[][] = new int[10][10];
 	
-//public void cRun(String pName, String ipAddress,int levelNo, int[] monsterCountReceived, int goldCount) 
-	public void cRun() throws IOException{
+	public void cRun(String pName, String ipAddress,int levelNo, int[] monsterCountReceived, int goldCount) throws IOException{
 		int y;
-		monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
 		String countPerTroop;
-		 System.out.println("FROM CLIENT");
+		 BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));       
 		 DatagramSocket clientSocket = new DatagramSocket();   
-		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPAddress());  
+		 InetAddress IPAddress = InetAddress.getByName(ipAddress);  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data = getTheDataFromTheClient();
-	     sendData = data.getBytes();       
+		 playerCoin = Integer.toString(goldCount);
+		 playerLevel = Integer.toString(levelNo);
+		 monsterCount = Arrays.toString(monsterCountReceived);
+		 sentence =  pName+"_"+playerLevel+"_"+monsterCount+"_"+playerCoin;
+		 //sentence = inFromUser.readLine();       
+		 sendData = sentence.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
@@ -36,39 +34,37 @@ public class VGClientUDP {
 	    
 	}
 	
-	public String getTheDataFromTheClient()
+	public void print( int[] monsterCountReceived)
 	{
-		String sentence = "";
-		 monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
-	     playerName = VGPlayerSingleton.getInstance().getPlayerName();
-		 playerLevel = Integer.toString(VGPlayerSingleton.getInstance().getLevel());
-		// monsterCount = Arrays.toString(monsterPerCount);
-		 playerCoin = Integer.toString(VGPlayerSingleton.getInstance().getGoldCoins());
-		 troopInPosition = VGGameSingleton.getInstance().getTroopInPosition();
-		 
-		 String troopData="";
-		 for(int m=0; m<8; m++)
-		 {
-			 troopData = troopData + monsterPerCount[m]+",";
-		 }
-		 
-		//PASS THE DATA TO THE SERVER - THE SEQUENCE IS THIS - pName, levelNo, int monsterCount, int goldCount, int[][] defenderTroop
-		 sentence = playerName+"_"+playerLevel+"_"+troopData+"_"+playerCoin;
-		 
-		 String sentence1 = "_";
-		 String separator = "";
-		 
-		 for(int i=0; i<10; i++){
-			// sentence1 = sentence1+"/";
-			 for(int j=0; j<10; j++){
-				   sentence1 = sentence1 +(Integer.toString(troopInPosition[i][j]))+",";
-			 }
-			 sentence1 = sentence1+"/";
-		 }
-		 
-		 sentence = sentence + sentence1;
-		 
-		 return sentence;
-		 
+		System.out.println("Count Per troop" +Arrays.toString(monsterCountReceived));
 	}
+	
+/*	public void insertPlayerData()
+	{
+		
+		 int x;
+		  for(x = 0; x<8; x++)
+		  {
+			  monsterPerCountReceived[x] = monsterCount[x];
+		  }
+		  
+		  this.playerCoin = goldCount;
+		  this.playerLevel = levelNo;
+		  
+		
+	} */
+	
+	public void sendPositions()
+	{
+		
+	}
+	
+	
+	public void sendLevelNo()
+	{
+		
+	}
+	
+   
+	
  } 

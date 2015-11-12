@@ -9,7 +9,7 @@ public class VGPlayerSingleton {
 	
 	private static VGGameClient client = null;
 	private String name;
-	private	String IPaddress;
+	private	String serverIPaddress;
 	
 	private int level = 0;
 	private int goldcoins = 100;
@@ -31,11 +31,11 @@ public class VGPlayerSingleton {
 		
 	}
 	
-	public static void setClient(String ipAddress, int port, String playerName, VGGameFrame frame) {
+	public static void setClient(String server, int port, String playerName, VGGameFrame frame) {
 		
 		if(client == null)
 		{
-			client = new VGGameClient(ipAddress,port,playerName,frame);
+			client = new VGGameClient(server,port,playerName,frame);
 		}
 		
 	}
@@ -49,7 +49,7 @@ public class VGPlayerSingleton {
 	public void setStats(String name, String serverIPaddress) {
 		
 		this.name = name;
-		this.IPaddress = IPaddress;
+		this.serverIPaddress = serverIPaddress;
 		
 	}
 	
@@ -110,14 +110,9 @@ public class VGPlayerSingleton {
 		
 	}
 	
-	public String getIPAddress()
-	{
-		return IPaddress;
-	}
-	
 	public int[] getPlayerTroops()
 	{
 		return playerTroops;
 	}
-
+	
 }
