@@ -77,8 +77,8 @@ public class VGServerClass {
 	
 	private void display(String msg) {
 		
-		String time = sdf.format(new Date()) + " " + msg;
-		gui.appendEvent(time);
+		//String time = sdf.format(new Date()) + " " + msg;
+		gui.appendEventForTCP(msg);
 		
 	}
 	
