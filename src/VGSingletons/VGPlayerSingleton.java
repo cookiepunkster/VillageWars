@@ -9,7 +9,7 @@ public class VGPlayerSingleton {
 	
 	private static VGGameClient client = null;
 	private String name;
-	private	String serverIPaddress;
+	private	String IPaddress;
 	
 	private int level = 0;
 	private int goldcoins = 100;
@@ -49,7 +49,7 @@ public class VGPlayerSingleton {
 	public void setStats(String name, String serverIPaddress) {
 		
 		this.name = name;
-		this.serverIPaddress = serverIPaddress;
+		this.IPaddress = serverIPaddress;
 		
 	}
 	
@@ -108,6 +108,11 @@ public class VGPlayerSingleton {
 		
 		return name;
 		
+	}
+	
+	public String getIPaddress()
+	{
+		return IPaddress;
 	}
 	
 	public int[] getPlayerTroops()

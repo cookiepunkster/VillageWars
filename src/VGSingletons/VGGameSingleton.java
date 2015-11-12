@@ -7,6 +7,7 @@ public class VGGameSingleton {
 	private static VGGameSingleton singleton = null;
 	private int[] cost = {1,5,10,10,10,20,30,1};
 	private int[][] defenderHealth = new int[10][10];
+	private int[][] troopInPosition = new int[10][10];
 	List<Integer[]> troopList = new ArrayList<Integer[]>();
 	//ArrayList<Integer[]> troopCount = new ArrayList<Integer[]>();
 	ArrayList<Integer> troopValue = new ArrayList<Integer>();
@@ -26,11 +27,24 @@ public class VGGameSingleton {
 		
 	}
 	
+	public void setTroopInPosition(int[][] buttonsValue)
+	{
+		for(int i=0; i<10; i++){
+			for(int j=0; j<10; j++){
+				troopInPosition[i][j] = buttonsValue[i][j];
+			}
+		}
+	}
+	
 	public int getTroopValues(int i)
 	{
 		return cost[i];
 	}
 	
+	public int[][] getTroopInPosition()
+	{
+		return troopInPosition;
+	}
 	
 	public void initializeDefenderHealth()
 	{

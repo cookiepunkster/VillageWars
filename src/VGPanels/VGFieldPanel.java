@@ -8,6 +8,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.*;
 import javax.swing.Timer;
+
+import VGCustomClasses.VGClientUDP;
+
 import java.util.concurrent.TimeUnit;
 
 import VGSingletons.VGGameSingleton;
@@ -15,6 +18,7 @@ import VGSingletons.VGPlayerSingleton;
 import VGSingletons.VGPropertiesSingleton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Random;
@@ -197,7 +201,17 @@ public class VGFieldPanel extends JPanel {
 			  
 				flag++;
 	     } //end to flag
-	 
+	  VGGameSingleton.getInstance().setTroopInPosition(buttonsValue);
+	  
+	   VGClientUDP a = new VGClientUDP();
+		try {
+			a.cRun();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+	  
    }
    
    
