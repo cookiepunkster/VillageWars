@@ -5,60 +5,97 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
+import javax.swing.text.DefaultCaret;
 
 public class VGServerGUI extends JFrame implements ActionListener {
 
-	private JTextArea status;
+	private JTextArea TCPstatus;
+	private JTextArea UDPstatus;
+	
 	private VGServerClass server;
-	private JButton startStop;
+	private JButton btnStartStop;
 	
 	VGServerGUI() {
 		
 		setLayout(new BorderLayout());
 		
-		JPanel center = new JPanel();
-		center.setLayout(new GridLayout(2,1));
-		center.setBackground(Color.YELLOW);
-		add(center);
+		JPanel statusPanel = new JPanel();
+		statusPanel.setLayout(new GridLayout(1,2));
+		statusPanel.setBackground(Color.YELLOW);
 		
-		status = new JTextArea(100,100);
-		status.setEditable(false);
-		appendEvent("Server online.\n");
-		center.add(status);
+		JPanel panelForTCP = new JPanel(new GridLayout(1,1));
 		
-		JPanel buttons = new JPanel();
-		buttons.setBackground(Color.BLUE);
-		buttons.setLayout(new GridLayout(1,2));
-		center.add(buttons);
+		TCPstatus = new JTextArea("Status for TCP.\n\n", 80,80);
+		TCPstatus.setEditable(false);
+		panelForTCP.add(new JScrollPane(TCPstatus));
+
+		Border borderForTCPStatus = BorderFactory.createLineBorder(Color.BLACK,1);
+		TCPstatus.setBorder(borderForTCPStatus);		
 		
-		/*
-		JButton start = new JButton("Start");
-		start.addActionListener(this);
-		buttons.add(start);
-		*/
+		DefaultCaret caretForTCP = (DefaultCaret)TCPstatus.getCaret();
+		caretForTCP.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
-		startStop = new JButton("Start");
-		startStop.addActionListener(this);
-		buttons.add(startStop);
+		
+		
+		JPanel panelForUDP = new JPanel(new GridLayout(1,1));
+		
+		UDPstatus = new JTextArea("Status for UDP.\n\n",80,80);
+		UDPstatus.setEditable(false);
+		panelForUDP.add(new JScrollPane(UDPstatus));
+		
+		Border borderForUDPStatus = BorderFactory.createLineBorder(Color.BLACK, 1);
+		UDPstatus.setBorder(borderForUDPStatus);
+		
+		DefaultCaret caretForUDP = (DefaultCaret)UDPstatus.getCaret();
+		caretForUDP.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
+		
+		
+		JPanel buttonsPanel = new JPanel(new GridLayout(1,1));
+		
+		btnStartStop = new JButton("Start");
+		btnStartStop.addActionListener(this);
+		buttonsPanel.add(btnStartStop);
+		
+		
+	
+		statusPanel.add(panelForTCP);
+		statusPanel.add(panelForUDP);
+		
+		add(buttonsPanel, BorderLayout.PAGE_END);
+		add(statusPanel, BorderLayout.CENTER);
 		
 		pack();
-		setSize(600,600);
+		setSize(700,700);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void appendEvent(String str) {
+	public void appendEventForTCP(String str) {
 		
-		//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		
-		//String event = sdf.format(new Date()) + ": " + str;
-		status.append(str);
-		status.setCaretPosition(status.getText().length() - 1);
+		String event = sdf.format(new Date()) + " :: " + str;
+		TCPstatus.append(str);
+		
+	}
+	
+	public void appendEventForUDP(String str) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		
+		String event = sdf.format(new Date()) + " :: " + str;
+		UDPstatus.append(str);
 		
 	}
 	
@@ -67,13 +104,13 @@ public class VGServerGUI extends JFrame implements ActionListener {
 		if(server != null)
 		{
 			server.stop();
-			appendEvent("\nServer stopped.");
+			appendEventForTCP("Server stopped.");
 			server = null;
-			startStop.setText("Start");
+			btnStartStop.setText("Start");
 			return;
 		}
 		
-		startStop.setText("Stop");
+		btnStartStop.setText("Stop");
 		
 		server = new VGServerClass(1500, this);
 		new ServerRunning().start();

@@ -167,7 +167,6 @@ private void setUpRemoveButtons(){
 					VGPlayerSingleton.getInstance().addGoldCoins(VGPropertiesSingleton.getInstance().getMonsterValues(i));
 					VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
 					countTroop[i].setText(Integer.toString(count[i]));
-				
 				}
 			}
 			
