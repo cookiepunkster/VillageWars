@@ -5,30 +5,68 @@ import java.net.*;
 import VGFrames.VGGameFrame;
 
 import java.io.*; import java.net.*; 
-class VGServerUDP {   
-public static void main(String args[]) throws Exception{          
-	 DatagramSocket serverSocket = new DatagramSocket(9876);            
-	 byte[] receiveData = new byte[1024];             
-	 byte[] sendData = new byte[1024];     
-	 
-	 while(true){             
-		 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
-		 serverSocket.receive(receivePacket);                   
-		 String receivedData = new String( receivePacket.getData()); 
-		 parseTheReceivedData(receivedData);
-		// System.out.println("RECEIVED: " + receivedData);                   
-		 InetAddress IPAddress = receivePacket.getAddress();                  
-		 int port = receivePacket.getPort();                   
-		 String capitalizedSentence = receivedData.toUpperCase();                   
-		 sendData = capitalizedSentence.getBytes();                   
-		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
-		 serverSocket.send(sendPacket); 	 
-		// openNewFrame(currentPlayer, level, monsterPerCount,goldS);
-			} 
-		} 
-   
+public class VGServerUDP {   
+	
+	public VGServerUDP() throws IOException {
+		           
+		 byte[] receiveData = new byte[1024];             
+		 byte[] sendData = new byte[1024];     
 
-     public static void openNewFrame(String name, String level, int[] troops, String money)
+		 byte[] receiveData1 = new byte[1024];             
+		 byte[] sendData1 = new byte[1024];     
+		 
+		 int flag = 0, flag1 = 0;
+		 
+		 
+		 while(true){                   
+			 
+			 if(flag == 0) {
+				 
+				 DatagramSocket serverSocket = new DatagramSocket(9876); 
+				 
+				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
+				 serverSocket.receive(receivePacket);             
+			
+				 String receivedData = new String( receivePacket.getData()); 
+				 parseTheReceivedData(receivedData);
+				 //flag++;
+				 
+				 InetAddress IPAddress = receivePacket.getAddress();                  
+				 int port = receivePacket.getPort();                   
+				 String capitalizedSentence = receivedData.toUpperCase();                   
+				 sendData = capitalizedSentence.getBytes();                   
+				 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
+				 serverSocket.send(sendPacket); 	 
+				 //openNewFrame("Jolly");
+				 
+				 flag = 1;
+			 }
+			 
+			 if(flag == 1) {
+				 
+				 DatagramSocket serverSocket1 = new DatagramSocket(9877); 
+				 
+				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
+				 serverSocket1.receive(receivePacket);             
+				 
+				 String receivedData1 = new String( receivePacket.getData()); 
+				 System.out.println("ATTACKED FROM: " + receivedData1);                   
+				 flag++;
+				
+				 InetAddress IPAddress = receivePacket.getAddress();                  
+				 int port = receivePacket.getPort();                   
+				 String capitalizedSentence = receivedData1.toUpperCase();                   
+				 sendData1 = capitalizedSentence.getBytes();                   
+				 DatagramPacket sendPacket = new DatagramPacket(sendData1, sendData1.length, IPAddress, port);                  
+				 serverSocket1.send(sendPacket); 	 
+				 //openNewFrame("Jolly");
+				 
+			 }
+				} 
+		
+	}
+
+     public static void openNewFrame(String name)
      {
     	// VGGameStates temp = new VGGameStates(name,level, troops, money);
     	 VGGameFrame vgObject = new VGGameFrame(name, "port");
@@ -101,7 +139,7 @@ public static void main(String args[]) throws Exception{
 		  		   String[] perArray = positionArray[i].split(",");
 		  		   int[][] valueInArray = new int[positionArray.length][perArray.length];
 		  		 
-		  		   for(int j=0; j<perArray.length; j++ )
+		  		   for(int j=0; j<perArray.length-1; j++ )
 		  		   {
 		  			   positionValue[i][j] = Integer.parseInt(perArray[j]);
 		  		   }
