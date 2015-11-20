@@ -44,10 +44,10 @@ public class VGFieldPanel extends JPanel {
 	int randXT;
 	int randYT;
 	int timer;
-	int seconds = 300;
+	int seconds = 60;
 	int minute;
 	int second;
-    
+	 VGClientUDP a = new VGClientUDP();
 
 	public VGFieldPanel() {
 		
@@ -75,7 +75,7 @@ public class VGFieldPanel extends JPanel {
 		
 		add(topPanel);
 		topPanel.add(labelTimer);
-		timerTextArea.setText("5:00");
+		timerTextArea.setText("1:00");
 		topPanel.add(timerTextArea);
 		topPanel.add(labelHit);
 		topPanel.add(hitTextArea);
@@ -112,19 +112,22 @@ public class VGFieldPanel extends JPanel {
 				second = (int) (TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) * 60));
 		
 				timerTextArea.setText(minute + ":" + second);
+				
+				//Clear all panels.
+				for(int i=0;i<10;i++)
+					for(int j=0;j<10;j++)
+						buttons[i][j].setBackground(null);
 				 
 					  for(int m=0; m<8; m++)
 					  {
 						  for(int n=0; n< troop[m]; n++)
 						  {
-							  randXA = random.nextInt(9) + 1;
-							  randYA = random.nextInt(9) + 0;
+							  randXA = random.nextInt(10) + 0;
+							  randYA = random.nextInt(10) + 0;
 							  
 							   attackTroop(m, n, randXA, randYA); 
 							  //  VGGameSingleton.getInstance().printDefenderHealth();
 							  //buttons[randXB][randYB].setBackground(new JButton().getBackground());
-							 
-							
 						  }
 						
 					  }
@@ -203,7 +206,7 @@ public class VGFieldPanel extends JPanel {
 	     } //end to flag
 	  VGGameSingleton.getInstance().setTroopInPosition(buttonsValue);
 	  
-	   VGClientUDP a = new VGClientUDP();
+	//  VGClientUDP a = new VGClientUDP();
 		try {
 			a.cRun();
 		} catch (IOException e) {
@@ -230,6 +233,14 @@ public class VGFieldPanel extends JPanel {
 	public void attack() {
 		VGGameSingleton.getInstance().attackerHealth();
 		timerStart();
+		
+		// VGClientUDP a = new VGClientUDP();
+			try {
+				a.cAttack();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	public void reset()
