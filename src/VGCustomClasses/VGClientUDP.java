@@ -49,7 +49,7 @@ public class VGClientUDP {
 		 byte[] receiveData = new byte[1024];   
 	     data1 = VGPlayerSingleton.getInstance().getIPaddress();
 	     sendData = data1.getBytes();       
-		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9877);       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
