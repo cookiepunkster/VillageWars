@@ -7,20 +7,21 @@ import VGFrames.VGGameFrame;
 import java.io.*; import java.net.*; 
 public class VGServerUDP {   
 	
-	public VGServerUDP() throws IOException {
-		           
+	
+	public static void main(String args[]) throws IOException {
+		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];     
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
 		 
-		 int flag = 0, flag1 = 0;
+		 //int flag = 0, flag1 = 0;
 		 
 		 
 		 while(true){                   
 			 
-			 if(flag == 0) {
+		//	 if(flag == 0) {
 				 
 				 DatagramSocket serverSocket = new DatagramSocket(9876); 
 				 
@@ -39,10 +40,10 @@ public class VGServerUDP {
 				 serverSocket.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
-				 flag = 1;
-			 }
+			//	 flag = 1;
+			 //}
 			 
-			 if(flag == 1) {
+			/* if(flag == 1) {
 				 
 				 DatagramSocket serverSocket1 = new DatagramSocket(9877); 
 				 
@@ -61,7 +62,7 @@ public class VGServerUDP {
 				 serverSocket1.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
-			 }
+			 }*/
 				} 
 		
 	}

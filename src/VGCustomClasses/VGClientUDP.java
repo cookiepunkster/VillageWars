@@ -35,6 +35,25 @@ public class VGClientUDP {
 	     clientSocket.close();    
 	    
 	}
+	public void cAttack() throws IOException{
+		int y;
+		monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
+		String countPerTroop;
+		 System.out.println("FROM CLIENT");
+		 DatagramSocket clientSocket = new DatagramSocket();   
+		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
+		 byte[] sendData = new byte[1024];       
+		 byte[] receiveData = new byte[1024];   
+	     data = VGPlayerSingleton.getInstance().getIPaddress();
+	     sendData = data.getBytes();       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
+		 clientSocket.send(sendPacket);       
+		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
+		 clientSocket.receive(receivePacket);       
+	     String modifiedSentence = new String(receivePacket.getData());      
+	     System.out.println("FROM SERVER:" + modifiedSentence);              
+	     clientSocket.close(); 
+	}
 	
 	public String getTheDataFromTheClient()
 	{
