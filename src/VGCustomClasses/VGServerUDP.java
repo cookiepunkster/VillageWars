@@ -17,16 +17,16 @@ public class VGServerUDP {
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
 		 
-		 //int flag = 0, flag1 = 0;
+		 int flag = 0, flag1 = 0;
 		 
+		 DatagramSocket serverSocket = new DatagramSocket(9876); 
 		 
 		 while(true){                   
 			 
-		//	 if(flag == 0) {
+			 if(flag == 0) {
 				 
-				 DatagramSocket serverSocket = new DatagramSocket(9876); 
-				 
-				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
+				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);  
+				 //receivePacket.setPort(9877);
 				 serverSocket.receive(receivePacket);             
 			
 				 String receivedData = new String( receivePacket.getData()); 
@@ -41,10 +41,10 @@ public class VGServerUDP {
 				 serverSocket.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
-			//	 flag = 1;
-			 //}
+				 flag = 1;
+			 }
 			 
-			/* if(flag == 1) {
+			 if(flag == 1) {
 				 
 				 DatagramSocket serverSocket1 = new DatagramSocket(9877); 
 				 
@@ -63,7 +63,9 @@ public class VGServerUDP {
 				 serverSocket1.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
-			 }*/
+				 
+				 
+			 }
 				} 
 		
 	}
@@ -80,6 +82,7 @@ public class VGServerUDP {
 		  	   String pName = "";
 		  	   int levelNumber;
 		  	   int playerGold;
+		  	   String playerIPAddress;
 		  	   int[] count = new int[8];
 		  	   int[][] positionValue = new int[10][10];
 		  	   String countArray;
@@ -100,10 +103,12 @@ public class VGServerUDP {
 		  	   
 		  	   System.out.println("Data Received");
 		
-		  	   pName = dataFromClient[0];
-		  	   levelNumber = Integer.parseInt(dataFromClient[1]);
 		  	   
-		  	   String[] troops = dataFromClient[2].split(",");
+		  	   pName = dataFromClient[0];
+		  	   playerIPAddress = dataFromClient[1];
+		  	   levelNumber = Integer.parseInt(dataFromClient[2]);
+		  	   
+		  	   String[] troops = dataFromClient[3].split(",");
 		  	   int[] troopCount = new int[troops.length];
 		  	   for(int i=0; i< troops.length; i++)
 		  	   {
@@ -112,9 +117,9 @@ public class VGServerUDP {
 		  	   }
 		  		   
 		  		   
-		  	   playerGold = Integer.parseInt(dataFromClient[3]);
+		  	   playerGold = Integer.parseInt(dataFromClient[4]);
 		  	   
-		  	   String[] positionPer10 = dataFromClient[4].split("/");
+		  	   String[] positionPer10 = dataFromClient[5].split("/");
 		  	   String[] positionArray = new String[positionPer10.length];
 		  	   for(int n=0; n< positionPer10.length; n++)
 		  	   {
@@ -158,8 +163,13 @@ public class VGServerUDP {
 		  	   }
 		  	   
 		  	 //String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue
-		  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue));
-     } 
+		  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue,sentence,playerIPAddress));
+		  	 
+		  	 for(int i = 0 ; i<clientList.size() ; i+=1)
+		  	 {
+		  		 System.out.println(clientList.get(i).getClientName());
+		  	 }
+		  } 
   
 
 } 
