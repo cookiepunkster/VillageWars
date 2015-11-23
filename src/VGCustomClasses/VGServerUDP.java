@@ -1,12 +1,26 @@
 package VGCustomClasses;
 import java.io.*; 
 import java.net.*;
-
 import VGFrames.VGGameFrame;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+
 
 import java.io.*; import java.net.*; 
 public class VGServerUDP {   
+	/**
+	 * GET FIRST THE INFO VALUES OF THE CLIENT when position value is clicked
+	 * Then, return the troopCount to the one who first clicked
+	 * Return the positionValues of the other Client
+	 * Show it to the Frame
+	 * Use the troopCount in attacking the village
+	 */
 	
+	
+	
+	
+	static ArrayList<Client> clientList = new ArrayList<Client>();
 	public VGServerUDP() throws IOException {
 		           
 		 byte[] receiveData = new byte[1024];             
@@ -33,7 +47,8 @@ public class VGServerUDP {
 				 
 				 InetAddress IPAddress = receivePacket.getAddress();                  
 				 int port = receivePacket.getPort();                   
-				 String capitalizedSentence = receivedData.toUpperCase();                   
+				 String capitalizedSentence = receivedData.toUpperCase();    
+				 System.out.println(IPAddress.toString());
 				 sendData = capitalizedSentence.getBytes();                   
 				 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
 				 serverSocket.send(sendPacket); 	 
@@ -155,7 +170,28 @@ public class VGServerUDP {
 		  		   System.out.println();
 		  	   }
 		  	   
-     } 
+		  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue));
+		  	 printClientInfo();
+     }
+     
+     public static void printClientInfo(){
+    	 for (int i = 0; i < clientList.size(); i++) {
+    		    Client clientInfo = clientList.get(i);
+    		    System.out.println("Client number: "+i);
+    		    clientInfo.getClientName();
+    		    clientInfo.getLevelNumber();
+    		    clientInfo.getClientTroopCount();
+    		    clientInfo.getPlayerGold();
+    		    clientInfo.getPositinValue();
+    		    
+    		    System.out.println("Client name" +  clientInfo.getClientName());
+    		    System.out.println("Client Level Number " + clientInfo.getLevelNumber());
+    		    System.out.println("Client goldMoney: "+ clientInfo.getPlayerGold());
+    		}
+     }
+ 
+     
+     
   
-
+     //Store pName, levelNumber, troopCount[], playerGold, positionValue[][] 
 } 

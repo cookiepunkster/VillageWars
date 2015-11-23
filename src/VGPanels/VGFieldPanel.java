@@ -47,6 +47,7 @@ public class VGFieldPanel extends JPanel {
 	int seconds = 300;
 	int minute;
 	int second;
+	VGClientUDP a = new VGClientUDP();
     
 
 	public VGFieldPanel() {
@@ -203,7 +204,7 @@ public class VGFieldPanel extends JPanel {
 	     } //end to flag
 	  VGGameSingleton.getInstance().setTroopInPosition(buttonsValue);
 	  
-	   VGClientUDP a = new VGClientUDP();
+	   
 		try {
 			a.cRun();
 		} catch (IOException e) {
