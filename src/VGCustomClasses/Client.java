@@ -7,15 +7,19 @@ public class Client {
 	private int[] clientTroopCount = new int[8];
 	private int clientGold;
 	private int[][] clientPositionValue = new int[10][10];
+	private String playerIPAddress;
+	private String sentence;
 	
 	public Client()
 	{
 		
 	}
 
-	public Client(String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue ){
+	public Client(String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue , String sentence, String playerIPAddress ){
 		this.clientName = name;
 		this.clientLevelNo = levelNumber;
+		this.playerIPAddress = playerIPAddress;
+		this.sentence = sentence;
 		
 		for(int i=0; i<8; i++)
 		{
