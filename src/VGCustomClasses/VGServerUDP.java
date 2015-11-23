@@ -1,12 +1,13 @@
 package VGCustomClasses;
 import java.io.*; 
 import java.net.*;
+import java.util.ArrayList;
 
 import VGFrames.VGGameFrame;
-
 import java.io.*; import java.net.*; 
+
 public class VGServerUDP {   
-	
+	static ArrayList<Client> clientList = new ArrayList<Client>();
 	
 	public static void main(String args[]) throws IOException {
 		     
@@ -156,6 +157,8 @@ public class VGServerUDP {
 		  		   System.out.println();
 		  	   }
 		  	   
+		  	 //String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue
+		  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue));
      } 
   
 
