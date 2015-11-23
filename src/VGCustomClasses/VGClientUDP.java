@@ -14,6 +14,7 @@ public class VGClientUDP {
 	String playerLevel;
 	String playerCoin;
 	String playerName;
+	String playerIPAddress;
 	int hitCount;
 	int troopInPosition[][] = new int[10][10];
 	
@@ -23,7 +24,7 @@ public class VGClientUDP {
 		monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
 		String countPerTroop;
 		 System.out.println("FROM CLIENT");
-		 DatagramSocket clientSocket = new DatagramSocket();   
+		 DatagramSocket clientSocket = new DatagramSocket(9876);   
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
@@ -40,7 +41,6 @@ public class VGClientUDP {
 	}
 	public void cAttack() throws IOException{
 		int y;
-		monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
 		String countPerTroop;
 		 System.out.println("FROM CLIENT");
 		 DatagramSocket clientSocket = new DatagramSocket();   
@@ -49,7 +49,7 @@ public class VGClientUDP {
 		 byte[] receiveData = new byte[1024];   
 	     data1 = VGPlayerSingleton.getInstance().getIPaddress();
 	     sendData = data1.getBytes();       
-		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9877);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
@@ -57,7 +57,7 @@ public class VGClientUDP {
 	     System.out.println("FROM SERVER:" + modifiedSentence);              
 	     clientSocket.close(); 
 	}
-	public void sendHitCount() throws IOException{
+/*	public void sendHitCount() throws IOException{
 		
 		hitCount = VGPlayerSingleton.getInstance().getHitCount();
 	//	String countPerTroop;
@@ -68,14 +68,14 @@ public class VGClientUDP {
 		 byte[] receiveData = new byte[1024];   
 	     data2 = Integer.toString(VGPlayerSingleton.getInstance().getHitCount());
 	     sendData = data2.getBytes();       
-		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9878);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
 	     String modifiedSentence = new String(receivePacket.getData());      
 	     System.out.println("FROM SERVER(hit count):" + modifiedSentence);              
 	     clientSocket.close(); 
-	}
+	}*/
 	
 	
 	
@@ -84,6 +84,7 @@ public class VGClientUDP {
 		String sentence = "";
 		 monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
 	     playerName = VGPlayerSingleton.getInstance().getPlayerName();
+	     playerIPAddress = VGPlayerSingleton.getInstance().getIPaddress();
 		 playerLevel = Integer.toString(VGPlayerSingleton.getInstance().getLevel());
 		// monsterCount = Arrays.toString(monsterPerCount);
 		 playerCoin = Integer.toString(VGPlayerSingleton.getInstance().getGoldCoins());
@@ -96,7 +97,7 @@ public class VGClientUDP {
 		 }
 		 
 		//PASS THE DATA TO THE SERVER - THE SEQUENCE IS THIS - pName, levelNo, int monsterCount, int goldCount, int[][] defenderTroop
-		 sentence = playerName+"_"+playerLevel+"_"+troopData+"_"+playerCoin;
+		 sentence = playerName+"_"+playerIPAddress+"_"+playerLevel+"_"+troopData+"_"+playerCoin;
 		 
 		 String sentence1 = "_";
 		 String separator = "";
