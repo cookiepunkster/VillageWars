@@ -7,11 +7,14 @@ import VGSingletons.*;
 
 public class VGClientUDP {   
 	String data;
+	String data1;
+	String data2;
 	String monsterCount;
 	int[] monsterPerCount = new int[8];
 	String playerLevel;
 	String playerCoin;
 	String playerName;
+	int hitCount;
 	int troopInPosition[][] = new int[10][10];
 	
 //public void cRun(String pName, String ipAddress,int levelNo, int[] monsterCountReceived, int goldCount) 
@@ -44,8 +47,8 @@ public class VGClientUDP {
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data = VGPlayerSingleton.getInstance().getIPaddress();
-	     sendData = data.getBytes();       
+	     data1 = VGPlayerSingleton.getInstance().getIPaddress();
+	     sendData = data1.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
@@ -54,6 +57,27 @@ public class VGClientUDP {
 	     System.out.println("FROM SERVER:" + modifiedSentence);              
 	     clientSocket.close(); 
 	}
+	public void sendHitCount() throws IOException{
+		
+		hitCount = VGPlayerSingleton.getInstance().getHitCount();
+	//	String countPerTroop;
+		 System.out.println("FROM CLIENT");
+		 DatagramSocket clientSocket = new DatagramSocket();   
+		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
+		 byte[] sendData = new byte[1024];       
+		 byte[] receiveData = new byte[1024];   
+	     data2 = Integer.toString(VGPlayerSingleton.getInstance().getHitCount());
+	     sendData = data2.getBytes();       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
+		 clientSocket.send(sendPacket);       
+		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
+		 clientSocket.receive(receivePacket);       
+	     String modifiedSentence = new String(receivePacket.getData());      
+	     System.out.println("FROM SERVER(hit count):" + modifiedSentence);              
+	     clientSocket.close(); 
+	}
+	
+	
 	
 	public String getTheDataFromTheClient()
 	{

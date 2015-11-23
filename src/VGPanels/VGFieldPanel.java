@@ -47,7 +47,8 @@ public class VGFieldPanel extends JPanel {
 	int seconds = 60;
 	int minute;
 	int second;
-	 VGClientUDP a = new VGClientUDP();
+	 VGClientUDP clientUDP = new VGClientUDP();
+	 
 
 	public VGFieldPanel() {
 		
@@ -105,6 +106,12 @@ public class VGFieldPanel extends JPanel {
 				if(seconds==0){
 				((Timer)e.getSource()).stop();
 					System.out.println("timer stop!");
+					try {
+						clientUDP.sendHitCount();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					//printVisitedArray();
 				}else{
 				seconds--;
@@ -124,6 +131,8 @@ public class VGFieldPanel extends JPanel {
 						  {
 							  randXA = random.nextInt(10) + 0;
 							  randYA = random.nextInt(10) + 0;
+							  
+						
 							  
 							   attackTroop(m, n, randXA, randYA); 
 							  //  VGGameSingleton.getInstance().printDefenderHealth();
@@ -174,8 +183,8 @@ public class VGFieldPanel extends JPanel {
 	  if(flag==0){  //one time to position the tower hall
 			
 			
-		 	 randXT = random.nextInt(6) + 4;
-			 randYT = random.nextInt(6) + 4;
+		 	 randXT = random.nextInt(10) + 0;
+			 randYT = random.nextInt(10) + 0;
 			
 		    ImageIcon tower = new ImageIcon(getClass().getResource("tower.png"));  //insert picture in a button
 			buttons[randXT][randYT].setIcon(tower);
@@ -188,12 +197,19 @@ public class VGFieldPanel extends JPanel {
 			  {
 				  for(int n=0; n< count[m]; n++)
 				  {
-					  randXB = random.nextInt(9) + 0;
-					  randYB = random.nextInt(9) + 0;
+					  randXB = random.nextInt(10) + 0;
+					  randYB = random.nextInt(10) + 0;
+					  
+					/*  if(randXB==randYB){
+						  while(randXB==randYB){
+							  randXB = random.nextInt(10) + 0;
+							  randYB = random.nextInt(10) + 0;
+						  }
+					  }*/
 					  
 					 if(buttonsValue[randXB][randYB] == 10 ){
-						  randXB = random.nextInt(9) + 1;
-						  randYB = random.nextInt(9) + 1;
+						  randXB = random.nextInt(10) + 0;
+						  randYB = random.nextInt(10) + 0;
 						 positionTroop(m, randXB, randYB); 
 						 VGGameSingleton.getInstance().defenderTroopHealth(m, randXB, randYB);
 					 } 
@@ -206,13 +222,13 @@ public class VGFieldPanel extends JPanel {
 	     } //end to flag
 	  VGGameSingleton.getInstance().setTroopInPosition(buttonsValue);
 	  
-	//  VGClientUDP a = new VGClientUDP();
-		try {
-			a.cRun();
+	//  VGClientUDP clientUDP = new VGClientUDP();
+	/*	try {
+			clientUDP.cRun();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	   
 	  
    }
@@ -235,12 +251,12 @@ public class VGFieldPanel extends JPanel {
 		timerStart();
 		
 		// VGClientUDP a = new VGClientUDP();
-			try {
+		/*	try {
 				a.cAttack();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 	}
 	
 	public void reset()
