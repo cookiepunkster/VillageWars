@@ -13,7 +13,8 @@ public class VGClientUDP {
 	String playerCoin;
 	String playerName;
 	int troopInPosition[][] = new int[10][10];
-
+	
+//public void cRun(String pName, String ipAddress,int levelNo, int[] monsterCountReceived, int goldCount) 
 	public void cRun() throws IOException{
 		int y;
 		monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
