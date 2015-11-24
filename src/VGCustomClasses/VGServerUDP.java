@@ -14,7 +14,7 @@ public class VGServerUDP {
 		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];     
-<<<<<<< HEAD
+
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
@@ -22,49 +22,42 @@ public class VGServerUDP {
 		 int flag = 0, flag1 = 0;
 		// String move;
 		 int n = 10;
-=======
->>>>>>> origin/master
+
 		 
 		 DatagramSocket serverSocket = new DatagramSocket(9876); 
 		 
-		 while(true){                   
-			 
-				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
-				 serverSocket.receive(receivePacket);             
-			
-				 String receivedData = new String( receivePacket.getData()); 
-				 parseTheReceivedData(receivedData);
-				 
-				 InetAddress IPAddress = receivePacket.getAddress();                  
-				 int port = receivePacket.getPort();                   
-				 String capitalizedSentence = receivedData.toUpperCase();                   
-				 sendData = capitalizedSentence.getBytes();                   
-				 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
-<<<<<<< HEAD
-				 serverSocket.send(sendPacket); 	 
-				 //openNewFrame("Jolly");
-				 
-				 
-				 if(playerMove == 1){
+				 while(true){                   
 					 
-				 }
-				 
-				 else{   //playerMove == 2
-					 
-				 }
-			
-		} 
-=======
-				 serverSocket.send(sendPacket); 
-				 
-				 //if() {
-					 
-				 //}
+						 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
+						 serverSocket.receive(receivePacket);             
+					
+						 String receivedData = new String( receivePacket.getData()); 
+						 parseTheReceivedData(receivedData);
+						 
+						 InetAddress IPAddress = receivePacket.getAddress();                  
+						 int port = receivePacket.getPort();                   
+						 String capitalizedSentence = receivedData.toUpperCase();                   
+						 sendData = capitalizedSentence.getBytes();                   
+						 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
+		
+						 serverSocket.send(sendPacket); 	 
+						 //openNewFrame("Jolly");
+						 
+						 
+						 if(playerMove == 1){
+							 
+						 }
+						 
+						 else{   //playerMove == 2
+							 
+						 }
+					
+				} 
+
 		
 		 }
->>>>>>> origin/master
-		
-	}
+
+	
 
      public static void openNewFrame(String name)
      {
