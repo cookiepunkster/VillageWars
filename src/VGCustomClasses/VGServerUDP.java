@@ -16,7 +16,8 @@ public class VGServerUDP {
 	public static void main(String args[]) throws IOException {
 		     
 		 byte[] receiveData = new byte[1024];             
-		 byte[] sendData = new byte[1024];     
+		 byte[] sendData = new byte[1024];  
+		 byte[] attackerData = new byte[1024];
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
@@ -42,16 +43,16 @@ public class VGServerUDP {
 						 System.out.println("IP: "+playerIPAddress);
 						 
 						 int port = receivePacket.getPort();                   
-						 String capitalizedSentence = receivedData.toUpperCase();                   
-						 sendData = capitalizedSentence.getBytes();                   
-						 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
-		
-						 serverSocket.send(sendPacket); 	 
+						 
 						 //openNewFrame("Jolly");
 						 
 						 
 						 if(playerMove == 1){
-							 
+							 String capitalizedSentence = receivedData.toUpperCase();                   
+							 sendData = capitalizedSentence.getBytes();                   
+							 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
+			
+							 serverSocket.send(sendPacket); 	
 						 }
 						 
 						 else{   //playerMove == 2
@@ -73,6 +74,15 @@ public class VGServerUDP {
 								 }
 								 
 							 }
+							  int[] clientTroop = new int[8];
+							
+							 clientTroop = clientList.get(attackerIndex).getClientTroopCount();
+							 String troopData="";
+							   
+							 for(int m=0; m<8; m++)
+							 {
+								 troopData = troopData + clientTroop[m]+",";
+							 }
 							 
 							 //find the one not the attacker
 							 
@@ -87,8 +97,10 @@ public class VGServerUDP {
 							 }
 							 
 							 //send data
-						 
-							 
+							 InetAddress IPAddress2 = InetAddress.getByName(clientList.get(enemyIndex).getIPAddress());
+							 attackerData = troopData.getBytes();                   
+							 DatagramPacket sendPacket1 = new DatagramPacket(attackerData, attackerData.length,IPAddress2, port);                  
+							 serverSocket.send(sendPacket1); 
 							 playerMove = 0;
 							 
 						 }
