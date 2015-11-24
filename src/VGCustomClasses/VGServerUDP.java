@@ -23,7 +23,7 @@ public class VGServerUDP {
 		 
 		 while(true){                   
 			 
-		if(flag == 0) {
+		if(flag < 2) {
 				 
 				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
 				 serverSocket.receive(receivePacket);             
@@ -40,10 +40,10 @@ public class VGServerUDP {
 				 serverSocket.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
-				 flag = 1;
+				 flag++;
 			 }
 			 
-			 if(flag == 1) {
+			 if(flag >= 2) {
 				 
 				 DatagramSocket serverSocket1 = new DatagramSocket(9877); 
 				 
@@ -52,7 +52,7 @@ public class VGServerUDP {
 				 
 				 String receivedData1 = new String( receivePacket.getData()); 
 				 System.out.println("ATTACKED FROM: " + receivedData1);                   
-				 flag++;
+				 //flag++;
 				
 				 InetAddress IPAddress = receivePacket.getAddress();                  
 				 int port = receivePacket.getPort();                   
