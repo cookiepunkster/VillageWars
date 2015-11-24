@@ -13,58 +13,29 @@ public class VGServerUDP {
 		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];     
-
-		 byte[] receiveData1 = new byte[1024];             
-		 byte[] sendData1 = new byte[1024];     
-		 
-		 int flag = 0, flag1 = 0;
 		 
 		 DatagramSocket serverSocket = new DatagramSocket(9876); 
 		 
 		 while(true){                   
 			 
-		if(flag < 2) {
-				 
 				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
 				 serverSocket.receive(receivePacket);             
 			
 				 String receivedData = new String( receivePacket.getData()); 
 				 parseTheReceivedData(receivedData);
-				 //flag++;
 				 
 				 InetAddress IPAddress = receivePacket.getAddress();                  
 				 int port = receivePacket.getPort();                   
 				 String capitalizedSentence = receivedData.toUpperCase();                   
 				 sendData = capitalizedSentence.getBytes();                   
 				 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
-				 serverSocket.send(sendPacket); 	 
-				 //openNewFrame("Jolly");
+				 serverSocket.send(sendPacket); 
 				 
-				 flag++;
-			 }
-			 
-			 if(flag >= 2 && flag != 0) {
-				 
-				 DatagramSocket serverSocket1 = new DatagramSocket(9877); 
-				 
-				 DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);                   
-				 serverSocket1.receive(receivePacket);             
-				 
-				 String receivedData1 = new String( receivePacket.getData()); 
-				 System.out.println("ATTACKED FROM: " + receivedData1);                   
-				 //flag++;
-				
-				 InetAddress IPAddress = receivePacket.getAddress();                  
-				 int port = receivePacket.getPort();                   
-				 String capitalizedSentence = receivedData1.toUpperCase();                   
-				 sendData1 = capitalizedSentence.getBytes();                   
-				 DatagramPacket sendPacket = new DatagramPacket(sendData1, sendData1.length, IPAddress, port);                  
-				 serverSocket1.send(sendPacket); 	 
-				 //openNewFrame("Jolly");
-				 
-				 flag = 0;
-			 }
-				} 
+				 //if() {
+					 
+				 //}
+		
+		 }
 		
 	}
 
