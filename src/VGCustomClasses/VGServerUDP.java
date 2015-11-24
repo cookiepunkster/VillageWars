@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import VGFrames.VGGameFrame;
+import VGFrames.VGMainFrame;
+
 import java.io.*; import java.net.*; 
 
 public class VGServerUDP {   
@@ -17,7 +19,7 @@ public class VGServerUDP {
 		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];  
-		 byte[] attackerData = new byte[1024];
+		 //byte[] attackerData = new byte[1024];
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
@@ -43,6 +45,8 @@ public class VGServerUDP {
 						 System.out.println("IP: "+playerIPAddress);
 						 
 						 int port = receivePacket.getPort();                   
+						 
+						 System.out.println("Port: "+port);
 						 
 						 //openNewFrame("Jolly");
 						 
@@ -74,35 +78,61 @@ public class VGServerUDP {
 								 }
 								 
 							 }
-							  int[] clientTroop = new int[8];
-							
-							 clientTroop = clientList.get(attackerIndex).getClientTroopCount();
+							  int[] attackerTroop = new int[8];
+							  int[][] defenderPosition = new int[10][10];							
+							 attackerTroop = clientList.get(attackerIndex).getClientTroopCount();
 							 String troopData="";
 							   
 							 for(int m=0; m<8; m++)
 							 {
-								 troopData = troopData + clientTroop[m]+",";
+								 troopData = troopData + attackerTroop[m]+",";
 							 }
+							 
+						
+							 
+							/* for(int i=0; i<10; i++)
+							 {
+								 for(int j=0; j<10;j++)
+								 {
+									 
+								 }
+							 }*/
 							 
 							 //find the one not the attacker
 							 
 							 while(true)
 							 {
 								
-								enemyIndex = (new Random()).nextInt(clientList.size()) + 1;
+								enemyIndex = (new Random()).nextInt(clientList.size());
 								
 								if(enemyIndex != attackerIndex)
 									break;
 										 
 							 }
 							 
+							 defenderPosition = clientList.get(enemyIndex).getPositinValue();
+							 
+							 System.out.println("Attacker: "+clientList.get(attackerIndex).getClientName());
+							 System.out.println("Enemy: "+clientList.get(enemyIndex).getClientName());
+							 
+							 
 							 //send data
+							 
+							 System.out.println("ip address: "+IPAddress.toString());
+							 
 							 InetAddress IPAddress2 = InetAddress.getByName(clientList.get(enemyIndex).getIPAddress());
+							 
+							 System.out.println("ip address 2: "+IPAddress2.toString());
+							 
+							 byte[] attackerData = new byte[1024];
+							 
 							 attackerData = troopData.getBytes();                   
 							 DatagramPacket sendPacket1 = new DatagramPacket(attackerData, attackerData.length,IPAddress2, port);                  
 							 serverSocket.send(sendPacket1); 
 							 playerMove = 0;
 							 
+							 
+							 //openNewFrame();
 						 }
 					
 				} 
@@ -112,10 +142,13 @@ public class VGServerUDP {
 
 	
 
-     public static void openNewFrame(String name)
+     public static void openNewFrame()
      {
+    	 
+
+ 		//VGMainFrame vgMainFrame = new VGMainFrame();
     	
-    	 VGGameFrame vgObject = new VGGameFrame(name, "port");
+    	 //VGGameFrame vgObject = new VGGameFrame(name, "port");
      }
 	
      
