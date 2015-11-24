@@ -2,6 +2,7 @@ package VGCustomClasses;
 import java.io.*; 
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import VGFrames.VGGameFrame;
 import java.io.*; import java.net.*; 
@@ -56,6 +57,40 @@ public class VGServerUDP {
 						 else{   //playerMove == 2
 							 attackerIPAddress = playerIPAddress;
 							 System.out.println("Attacker IP address:"+attackerIPAddress);
+						
+							 //find the attacker at client arraylist
+							 
+							 int attackerIndex = 0;
+							 int enemyIndex = 0;
+							 
+							 for(int i = 0 ; i<clientList.size() ; i+=1)
+							 {
+								 
+								 if(clientList.get(i).getIPAddress().equals(attackerIPAddress))
+								 {
+									 attackerIndex = i;
+									 break;
+								 }
+								 
+							 }
+							 
+							 //find the one not the attacker
+							 
+							 while(true)
+							 {
+								
+								enemyIndex = (new Random()).nextInt(clientList.size()) + 1;
+								
+								if(enemyIndex != attackerIndex)
+									break;
+										 
+							 }
+							 
+							 //send data
+						 
+							 
+							 playerMove = 0;
+							 
 						 }
 					
 				} 
@@ -165,7 +200,7 @@ public class VGServerUDP {
 					  	   }
 					  	   
 					  	 //String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue
-					  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue, sentence, playerIPAddress));
+					  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue, sentence, clientIP));
 					  	// setMove(move);
 		  	   }
 		  	   else{  // move is attack

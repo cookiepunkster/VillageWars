@@ -43,6 +43,11 @@ public class Client {
 		return clientName;
 	}
 	
+	public String getIPAddress()
+	{
+		return playerIPAddress;
+	}
+	
 	public int getLevelNumber()
 	{
 		return clientLevelNo;
