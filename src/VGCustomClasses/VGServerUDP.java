@@ -10,12 +10,12 @@ public class VGServerUDP {
 	static ArrayList<Client> clientList = new ArrayList<Client>();
 	static int playerMove;
 	static String attackerIPAddress;
+	static String playerIPAddress;
 	
 	public static void main(String args[]) throws IOException {
 		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];     
-
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
@@ -35,7 +35,11 @@ public class VGServerUDP {
 						 String receivedData = new String( receivePacket.getData()); 
 						 parseTheReceivedData(receivedData);
 						 
-						 InetAddress IPAddress = receivePacket.getAddress();                  
+						 InetAddress IPAddress = receivePacket.getAddress();    
+						 playerIPAddress = receivePacket.getAddress().toString().replace("/", "");
+						 
+						 System.out.println("IP: "+playerIPAddress);
+						 
 						 int port = receivePacket.getPort();                   
 						 String capitalizedSentence = receivedData.toUpperCase();                   
 						 sendData = capitalizedSentence.getBytes();                   
@@ -50,6 +54,7 @@ public class VGServerUDP {
 						 }
 						 
 						 else{   //playerMove == 2
+							 attackerIPAddress = playerIPAddress;
 							 System.out.println("Attacker IP address:"+attackerIPAddress);
 						 }
 					
@@ -72,7 +77,6 @@ public class VGServerUDP {
 		  	   String pName = "";
 		  	   int levelNumber;
 		  	   int playerGold;
-		  	   String playerIPAddress;
 		  	   String move;
 		  	   
 		  	   int[] count = new int[8];
@@ -99,7 +103,7 @@ public class VGServerUDP {
 		  	   {
 		  		   		  playerMove = 1;
 					  	   pName = dataFromClient[1];
-					  	   playerIPAddress = dataFromClient[2];
+					  	   //playerIPAddress = dataFromClient[2];
 					  	   levelNumber = Integer.parseInt(dataFromClient[3]);
 					  	   
 					  	   String[] troops = dataFromClient[4].split(",");
