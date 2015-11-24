@@ -14,6 +14,7 @@ public class VGServerUDP {
 		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];     
+<<<<<<< HEAD
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
@@ -21,6 +22,8 @@ public class VGServerUDP {
 		 int flag = 0, flag1 = 0;
 		// String move;
 		 int n = 10;
+=======
+>>>>>>> origin/master
 		 
 		 DatagramSocket serverSocket = new DatagramSocket(9876); 
 		 
@@ -31,13 +34,13 @@ public class VGServerUDP {
 			
 				 String receivedData = new String( receivePacket.getData()); 
 				 parseTheReceivedData(receivedData);
-				 //flag++;
 				 
 				 InetAddress IPAddress = receivePacket.getAddress();                  
 				 int port = receivePacket.getPort();                   
 				 String capitalizedSentence = receivedData.toUpperCase();                   
 				 sendData = capitalizedSentence.getBytes();                   
 				 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);                  
+<<<<<<< HEAD
 				 serverSocket.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
@@ -51,6 +54,15 @@ public class VGServerUDP {
 				 }
 			
 		} 
+=======
+				 serverSocket.send(sendPacket); 
+				 
+				 //if() {
+					 
+				 //}
+		
+		 }
+>>>>>>> origin/master
 		
 	}
 
