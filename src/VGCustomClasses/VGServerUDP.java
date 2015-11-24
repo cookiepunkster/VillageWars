@@ -9,6 +9,7 @@ import java.io.*; import java.net.*;
 public class VGServerUDP {   
 	static ArrayList<Client> clientList = new ArrayList<Client>();
 	static int playerMove;
+	static String attackerIPAddress;
 	
 	public static void main(String args[]) throws IOException {
 		     
@@ -49,7 +50,7 @@ public class VGServerUDP {
 						 }
 						 
 						 else{   //playerMove == 2
-							 
+							 System.out.println("Attacker IP address:"+attackerIPAddress);
 						 }
 					
 				} 
@@ -162,7 +163,14 @@ public class VGServerUDP {
 		  	   else{  // move is attack
 		  		    playerMove = 2;
 		  		    playerIPAddress = dataFromClient[1];
+		  		    setAttackerIPaddress(playerIPAddress);
+		  		    
 		  	   }
+     }
+     
+     public static void setAttackerIPaddress(String playerIPAddress)
+     {
+    	   attackerIPAddress = playerIPAddress;
      }
      
 

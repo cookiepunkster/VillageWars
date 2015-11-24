@@ -42,7 +42,7 @@ public class VGClientUDP {
 	public void cAttack() throws IOException{
 		int y;
 		String countPerTroop;
-		 System.out.println("FROM CLIENT");
+		 System.out.println("FROM CLIENT:(Attack)");
 		 DatagramSocket clientSocket = new DatagramSocket();   
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
@@ -54,7 +54,7 @@ public class VGClientUDP {
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
 	     String modifiedSentence = new String(receivePacket.getData());      
-	     System.out.println("FROM SERVER:" + modifiedSentence);              
+	     System.out.println("FROM SERVER:(Attack)" + modifiedSentence);              
 	     clientSocket.close(); 
 	}
 /*	public void sendHitCount() throws IOException{
