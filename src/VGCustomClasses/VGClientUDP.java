@@ -47,7 +47,7 @@ public class VGClientUDP {
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data1 = VGPlayerSingleton.getInstance().getIPaddress();
+	     data1 = "attack"+"_"+VGPlayerSingleton.getInstance().getIPaddress();
 	     sendData = data1.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9877);       
 		 clientSocket.send(sendPacket);       
@@ -97,7 +97,7 @@ public class VGClientUDP {
 		 }
 		 
 		//PASS THE DATA TO THE SERVER - THE SEQUENCE IS THIS - pName, levelNo, int monsterCount, int goldCount, int[][] defenderTroop
-		 sentence = playerName+"_"+playerIPAddress+"_"+playerLevel+"_"+troopData+"_"+playerCoin;
+		 sentence = "position"+"_"+playerName+"_"+playerIPAddress+"_"+playerLevel+"_"+troopData+"_"+playerCoin;
 		 
 		 String sentence1 = "_";
 		 String separator = "";
