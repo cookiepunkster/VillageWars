@@ -43,7 +43,7 @@ public class VGServerUDP {
 				 flag++;
 			 }
 			 
-			 if(flag >= 2) {
+			 if(flag >= 2 && flag != 0) {
 				 
 				 DatagramSocket serverSocket1 = new DatagramSocket(9877); 
 				 
@@ -62,6 +62,7 @@ public class VGServerUDP {
 				 serverSocket1.send(sendPacket); 	 
 				 //openNewFrame("Jolly");
 				 
+				 flag = 0;
 			 }
 				} 
 		
