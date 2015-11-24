@@ -26,9 +26,10 @@ public class VGClientUDP {
 		 System.out.println("FROM CLIENT");
 		 DatagramSocket clientSocket = new DatagramSocket(9876);   
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
+		 InetAddress playerIPAddress2 = InetAddress.getByName("192.168.10.12");
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data = getTheDataFromTheClient();
+	     data = getTheDataFromTheClient(playerIPAddress2.toString());
 	     sendData = data.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
@@ -79,12 +80,12 @@ public class VGClientUDP {
 	
 	
 	
-	public String getTheDataFromTheClient()
+	public String getTheDataFromTheClient(String clientIPAddress)
 	{
 		String sentence = "";
 		 monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
 	     playerName = VGPlayerSingleton.getInstance().getPlayerName();
-	     playerIPAddress = VGPlayerSingleton.getInstance().getIPaddress();
+	     playerIPAddress = clientIPAddress;
 		 playerLevel = Integer.toString(VGPlayerSingleton.getInstance().getLevel());
 		// monsterCount = Arrays.toString(monsterPerCount);
 		 playerCoin = Integer.toString(VGPlayerSingleton.getInstance().getGoldCoins());
