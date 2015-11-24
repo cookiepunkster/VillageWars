@@ -82,6 +82,7 @@ public class VGServerUDP {
 		  	   int[] count = new int[8];
 		  	   int[][] positionValue = new int[10][10];
 		  	   String countArray;
+		  	   String clientIP;
 		  	 //  System.out.println("Separate the values!");
 		  	   String[] receivedData = sentence.split("_");
 		  	   String[] dataFromClient = new String[receivedData.length];
@@ -103,7 +104,9 @@ public class VGServerUDP {
 		  	   {
 		  		   		  playerMove = 1;
 					  	   pName = dataFromClient[1];
-					  	   //playerIPAddress = dataFromClient[2];
+					  	   clientIP = dataFromClient[2];
+					  	   clientIP = clientIP.replace("/", "");
+					  	   
 					  	   levelNumber = Integer.parseInt(dataFromClient[3]);
 					  	   
 					  	   String[] troops = dataFromClient[4].split(",");
@@ -126,7 +129,8 @@ public class VGServerUDP {
 					  	   }
 					
 					  	   System.out.println("Player name: "+pName);
-					
+					  	   System.out.println("Client IP: "+clientIP);
+					  	   
 					  	   System.out.println("Level:"+levelNumber);
 					  	   
 					  	   for(int i : troopCount)
