@@ -101,25 +101,27 @@ public class VGClientUDP {
 	  	 VGPropertiesSingleton.getInstance().getFieldPanel().attackTheDefender();
 	
 	}
-/*	public void sendHitCount() throws IOException{
+	
+	
+	public void sendHitCount() throws IOException{
 		
 		hitCount = VGPlayerSingleton.getInstance().getHitCount();
-	//	String countPerTroop;
-		 System.out.println("FROM CLIENT");
+		String attackerName = VGPlayerSingleton.getInstance().getPlayerName();
+		 System.out.println("FROM CLIENT: (HIT COUNT)");
 		 DatagramSocket clientSocket = new DatagramSocket();   
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data2 = Integer.toString(VGPlayerSingleton.getInstance().getHitCount());
+	     data2 = "sendHitCount"+"_"+attackerName+"_"+Integer.toString(VGPlayerSingleton.getInstance().getHitCount());
 	     sendData = data2.getBytes();       
-		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9878);       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
 	     String modifiedSentence = new String(receivePacket.getData());      
 	     System.out.println("FROM SERVER(hit count):" + modifiedSentence);              
 	     clientSocket.close(); 
-	}*/
+	}
 	
 	
 	
@@ -149,7 +151,15 @@ public class VGClientUDP {
 		 for(int i=0; i<10; i++){
 			// sentence1 = sentence1+"/";
 			 for(int j=0; j<10; j++){
-				   sentence1 = sentence1 +(Integer.toString(troopInPosition[i][j]))+",";
+				
+				   if(j==9)
+				   {
+					   sentence1 = sentence1 +(Integer.toString(troopInPosition[i][j]));
+				   }
+				   
+				   else{
+					   sentence1 = sentence1 +(Integer.toString(troopInPosition[i][j]))+",";
+				   }
 			 }
 			 sentence1 = sentence1+"/";
 		 }

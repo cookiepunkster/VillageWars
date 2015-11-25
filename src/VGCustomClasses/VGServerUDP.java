@@ -9,10 +9,12 @@ import java.io.*; import java.net.*;
 
 public class VGServerUDP {   
 	static ArrayList<Client> clientList = new ArrayList<Client>();
+	static ArrayList<HitCount> hitCountList = new ArrayList<HitCount>();
 	static int playerMove;
 	static String attackerIPAddress;
 	static String playerIPAddress;
-	
+	static int numberOfClients = 0;
+	static int attackerHit = 0;
 	public static void main(String args[]) throws IOException {
 		     
 		 byte[] receiveData = new byte[1024];             
@@ -55,7 +57,7 @@ public class VGServerUDP {
 							 serverSocket.send(sendPacket); 	
 						 }
 						 
-						 else{   //playerMove == 2
+						 else if(playerMove == 2){   //playerMove == 2
 							 attackerIPAddress = playerIPAddress;
 							 System.out.println("Attacker IP address:"+attackerIPAddress);
 						
@@ -101,7 +103,7 @@ public class VGServerUDP {
 							 byte[] defenderTroopPositionData = new byte[1024];
 							 
 							 String sentence1 = "";
-							
+							 defenderTroopInPosition = clientList.get(enemyIndex).getPositionValue();
 							 for(int i=0; i<10; i++){
 								// sentence1 = sentence1+"/";
 								 for(int j=0; j<10; j++){
@@ -112,14 +114,53 @@ public class VGServerUDP {
 							 
 							// sentence = sentence + sentence1;
 							 
-							 defenderTroopInPosition = clientList.get(enemyIndex).getPositionValue();
+					
 							 //send the troopInPosition of the defender data
 							 InetAddress IPAddress2 = InetAddress.getByName(clientList.get(enemyIndex).getIPAddress());
 							 defenderTroopPositionData = sentence1.getBytes();                   
 							 DatagramPacket sendPacket1 = new DatagramPacket(defenderTroopPositionData,defenderTroopPositionData.length,IPAddress, port);                  
 							 serverSocket.send(sendPacket1); 
-							 playerMove = 0;
+							 //playerMove = 0;
 							 
+						 }
+						 
+						 else{
+							 byte[] winnerName = new byte[1024];
+							 String clientName = "";
+							 int max = 0;
+							 if(attackerHit == numberOfClients)
+							 {
+								 for(int i = 0 ; i<hitCountList.size() ; i+=1)
+								 {
+									 
+									 if(hitCountList.get(i).getHitCount() > max)
+									 {
+										 max = hitCountList.get(i).getHitCount();
+									 }
+									 
+								 }
+							 }
+							 String maximum = Integer.toString(max);
+							 
+							 for(int i = 0 ; i<hitCountList.size() ; i+=1)
+							 {
+								 
+								 if(hitCountList.get(i).getHitCount() == max)
+								 {
+									 clientName = hitCountList.get(i).getClientName();
+								 }
+								 
+							 }
+							 
+							 
+							 winnerName = clientName.getBytes();                   
+							 DatagramPacket sendPacket2 = new DatagramPacket(winnerName,winnerName.length,IPAddress, port);                  
+							 serverSocket.send(sendPacket2); 
+							 
+							 
+							 System.out.println("Winner name: "+clientName);
+							// max = 0;
+							 //playerMove = 0;
 						 }
 					
 				} 
@@ -231,12 +272,23 @@ public class VGServerUDP {
 					  	 
 					  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue, sentence, clientIP));
 					  	// setMove(move);
+					  	 numberOfClients++;
 		  	   }
-		  	   else{  // move is attack
+		  	   else if(move.equals("attack")){
 		  		    playerMove = 2;
 		  		    playerIPAddress = dataFromClient[1];
-		  		    setAttackerIPaddress(playerIPAddress);
-		  		    
+		  		    setAttackerIPaddress(playerIPAddress);		 
+		     	 }
+		  	  
+		  	   else{  // move is attack
+		  		   String attackerName;
+		  		    int hitCount;
+		  		 
+		  		    playerMove = 3;
+		  		    attackerName = dataFromClient[2];
+		  		    hitCount = Integer.parseInt(dataFromClient[3]);
+		  		    hitCountList.add(new HitCount(attackerName, hitCount));
+		  		    attackerHit++;
 		  	   }
      }
      

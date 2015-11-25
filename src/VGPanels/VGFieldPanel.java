@@ -106,12 +106,12 @@ public class VGFieldPanel extends JPanel {
 				if(seconds==0){
 				((Timer)e.getSource()).stop();
 					System.out.println("timer stop!");
-				/*	try {
-						clientUDP.sendHitCount();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}*/
+						    try {
+								clientUDP.sendHitCount();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 					//printVisitedArray();
 				}else{
 				seconds--;
@@ -247,8 +247,8 @@ public class VGFieldPanel extends JPanel {
    }
    
 	public void attack() {
-		VGGameSingleton.getInstance().attackerHealth();
-		timerStart();
+		//VGGameSingleton.getInstance().attackerHealth();
+		//timerStart();
 		
 		
 			try {
