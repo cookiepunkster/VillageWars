@@ -259,6 +259,12 @@ public class VGFieldPanel extends JPanel {
 			}
 	}
 	
+	public void attackTheDefender()
+	{
+		VGGameSingleton.getInstance().attackerHealth();
+		timerStart();
+	}
+	
 	public void reset()
 	{
 		for(int i = 0 ; i<10 ; i+=1)
@@ -275,10 +281,34 @@ public class VGFieldPanel extends JPanel {
 		buttons[randXT][randYT].setIcon(null);
 		buttons[randXT][randYT].setEnabled(false);
 	   flag = 0;
+	   
+	  // VGGameSingleton.getInstance().resetTroopInPosition();
 	   VGPlayerSingleton.getInstance().resetGoldCount();
 	   VGPropertiesSingleton.getInstance().getStatsPanel().updateGoldCount();
 	   
 	}
+	
+	
+	public void resetField()
+	{
+		for(int i = 0 ; i<10 ; i++)
+		{
+			for(int j = 0 ; j<10 ; j++)
+			{
+				
+				 buttons[i][j].setIcon(null);
+				 buttons[i][j].setEnabled(false);
+			}
+			
+		} 
+		
+		//buttons[randXT][randYT].setIcon(null);
+		//buttons[randXT][randYT].setEnabled(false);
+	   //flag = 0;
+	   
+	    VGGameSingleton.getInstance().resetTroopInPosition();
+	}
+	
 	
 	public void positionTroop(int monster, int x, int y)
 	{
@@ -286,6 +316,84 @@ public class VGFieldPanel extends JPanel {
 				buttons[x][y].setIcon(troop);
 				buttons[x][y].setEnabled(true);
 				buttonsValue[x][y] = monster;
+	}
+	
+	public void showDefenderTroop()
+	{
+				
+				int[][] defenderTroopInPosition = new int[10][10];
+				defenderTroopInPosition = VGGameSingleton.getInstance().getTroopInPosition();
+				
+				for(int x=0; x<10; x++){
+					for(int y=0; y<10; y++){
+						if(defenderTroopInPosition[x][y] == 0)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(0+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 1)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(1+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 2)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(2+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 3)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(3+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 4)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(4+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 5)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(5+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+
+						else if(defenderTroopInPosition[x][y] == 6)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(6+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 7)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource(7+".png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						else if(defenderTroopInPosition[x][y] == 8)
+						{
+							  ImageIcon troop = new ImageIcon(getClass().getResource("tower.png"));  //insert picture in a button
+								buttons[x][y].setIcon(troop);
+								buttons[x][y].setEnabled(true);
+						}
+						
+						
+						
+					}
+				}
 	}
 	
 	public void attackTroop(int troop, int counter, int x, int y)

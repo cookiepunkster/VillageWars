@@ -36,6 +36,15 @@ public class VGGameSingleton {
 		}
 	}
 	
+	public void resetTroopInPosition()
+	{
+		for(int i=0; i<10; i++){
+			for(int j=0; j<10; j++){
+				troopInPosition[i][j] = 10;
+			}
+		}
+	}
+	
 	public int getTroopValues(int i)
 	{
 		return cost[i];

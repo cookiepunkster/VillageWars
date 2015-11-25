@@ -52,6 +52,8 @@ public class VGClientUDP {
 	     sendData = data1.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
+		
+		 
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
 	     String modifiedSentence = new String(receivePacket.getData()); 
@@ -92,6 +94,11 @@ public class VGClientUDP {
 	  		   }
 	  		  System.out.println();
 	  	   }
+	  	   
+	  	   VGPropertiesSingleton.getInstance().getFieldPanel().resetField();
+	  	   VGGameSingleton.getInstance().setTroopInPosition(defenderPositionValue);
+	  	  VGPropertiesSingleton.getInstance().getFieldPanel().showDefenderTroop();
+	  	 VGPropertiesSingleton.getInstance().getFieldPanel().attackTheDefender();
 	
 	}
 /*	public void sendHitCount() throws IOException{
