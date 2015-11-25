@@ -124,7 +124,7 @@ public class VGServerUDP {
 							 
 						 }
 						 
-						 else{
+						 else{  //playerMove == 3
 							 byte[] winnerName = new byte[1024];
 							 String clientName = "";
 							 int max = 0;
@@ -139,28 +139,30 @@ public class VGServerUDP {
 									 }
 									 
 								 }
-							 }
-							 String maximum = Integer.toString(max);
-							 
-							 for(int i = 0 ; i<hitCountList.size() ; i+=1)
-							 {
 								 
-								 if(hitCountList.get(i).getHitCount() == max)
+								 String maximum = Integer.toString(max);
+								 
+								 for(int i = 0 ; i<hitCountList.size() ; i+=1)
 								 {
-									 clientName = hitCountList.get(i).getClientName();
+									 
+									 if(hitCountList.get(i).getHitCount() == max)
+									 {
+										 clientName = hitCountList.get(i).getClientName();
+									 }
+									 
 								 }
 								 
+								 
+								 winnerName = clientName.getBytes();                   
+								 DatagramPacket sendPacket2 = new DatagramPacket(winnerName,winnerName.length,IPAddress, port);                  
+								 serverSocket.send(sendPacket2); 
+								 
+								 
+								 System.out.println("Winner name: "+clientName);
 							 }
-							 
-							 
-							 winnerName = clientName.getBytes();                   
-							 DatagramPacket sendPacket2 = new DatagramPacket(winnerName,winnerName.length,IPAddress, port);                  
-							 serverSocket.send(sendPacket2); 
-							 
-							 
-							 System.out.println("Winner name: "+clientName);
+						
 							// max = 0;
-							 //playerMove = 0;
+							 playerMove = 0;
 						 }
 					
 				} 
@@ -188,7 +190,7 @@ public class VGServerUDP {
 		  	   int[][] positionValue = new int[10][10];
 		  	   String countArray;
 		  	   String clientIP;
-		  	 //  System.out.println("Separate the values!");
+
 		  	   String[] receivedData = sentence.split("_");
 		  	   String[] dataFromClient = new String[receivedData.length];
 		  	   for(int i=0; i< receivedData.length; i++)
@@ -196,12 +198,7 @@ public class VGServerUDP {
 		  		      String data =  receivedData[i];
 		  		      dataFromClient[i] = data;
 		  	   }
-		  	   
-		  	   
-		  	/*   for(String i : dataFromClient)
-		  	   {
-		  		   System.out.println(i);
-		  	   } */
+		 
 		  	   
 		  	   System.out.println("Data Received");
 		  	   move = dataFromClient[0];
@@ -285,8 +282,8 @@ public class VGServerUDP {
 		  		    int hitCount;
 		  		 
 		  		    playerMove = 3;
-		  		    attackerName = dataFromClient[2];
-		  		    hitCount = Integer.parseInt(dataFromClient[3]);
+		  		    attackerName = dataFromClient[1];
+		  		    hitCount = Integer.parseInt(dataFromClient[2]);
 		  		    hitCountList.add(new HitCount(attackerName, hitCount));
 		  		    attackerHit++;
 		  	   }

@@ -161,7 +161,15 @@ public class VGClientUDP {
 					   sentence1 = sentence1 +(Integer.toString(troopInPosition[i][j]))+",";
 				   }
 			 }
-			 sentence1 = sentence1+"/";
+			 if(i==9)
+			 {
+				 sentence1 = sentence1;
+			 }
+			 else{
+				  sentence1 = sentence1+"/";
+			 }
+			 
+			// sentence1 = sentence1+"/";
 		 }
 		 
 		 sentence = sentence + sentence1;
