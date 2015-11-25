@@ -84,6 +84,14 @@ public class VGClientUDP {
 	  			   defenderPositionValue[i][j] = Integer.parseInt(perArray[j]);
 	  		   }
 	  	   }
+	  	   
+	  	   
+	  	   for(int i=0; i<10; i++){
+	  		   for(int j=0; j<10; j++){
+	  			 System.out.print(defenderPositionValue[i][j]+" ");
+	  		   }
+	  		  System.out.println();
+	  	   }
 	
 	}
 /*	public void sendHitCount() throws IOException{
