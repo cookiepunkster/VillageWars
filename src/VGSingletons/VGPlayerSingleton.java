@@ -10,6 +10,7 @@ public class VGPlayerSingleton {
 	private static VGGameClient client = null;
 	private String name;
 	private	String IPaddress;
+	private	String clientLocalhost;
 	
 	private int level = 0;
 	private int goldcoins = 100;
@@ -46,11 +47,11 @@ public class VGPlayerSingleton {
 		
 	}
 	
-	public void setStats(String name, String serverIPaddress) {
+	public void setStats(String name, String serverIPaddress, String localhost) {
 		
 		this.name = name;
 		this.IPaddress = serverIPaddress;
-		
+		this.clientLocalhost = localhost;
 	}
 	
 	public void addHitCount()
@@ -113,6 +114,11 @@ public class VGPlayerSingleton {
 	public String getIPaddress()
 	{
 		return IPaddress;
+	}
+	
+	public String getLocalhost()
+	{
+		return clientLocalhost;
 	}
 	
 	public int[] getPlayerTroops()

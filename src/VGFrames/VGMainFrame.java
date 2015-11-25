@@ -19,10 +19,13 @@ public class VGMainFrame extends JFrame implements ActionListener{
 	JLabel label1;
 	JTextArea nameTextArea;
 	JTextArea portTextArea;
+	JTextArea localhostTextArea;
 	String name;
 	String ipAddress;
+	String localhost;
 	String initialNameText = "Enter your name here.";
 	String initialIPText = "Enter the IP address of the server.";
+	String initialText = "Enter your localhost.";
 	  
 	public VGMainFrame()  //constructor
 	{
@@ -61,6 +64,8 @@ public class VGMainFrame extends JFrame implements ActionListener{
 		  nameTextArea.setBounds(400, 400, 200, 25);
 		  portTextArea = new JTextArea(initialIPText);
 		  portTextArea.setBounds(400, 430, 200, 25);
+		  localhostTextArea = new JTextArea(initialText);
+		  localhostTextArea.setBounds(400, 460, 200, 25);
 		  
 		  nameTextArea.addFocusListener(new FocusListener(){
 		  public void focusGained(FocusEvent e) {
@@ -86,15 +91,30 @@ public class VGMainFrame extends JFrame implements ActionListener{
 					}
 			  
 		  });
+		  
+		  localhostTextArea.addFocusListener(new FocusListener(){
+			  public void focusGained(FocusEvent e) {
+			        if (localhostTextArea.getText().equals(initialText)) {
+			        	localhostTextArea.selectAll();
+			        
+			       }
+			  }
+					@Override
+					public void focusLost(FocusEvent e) {
+					}
+			  
+		  });
+		  
 		  panel1.add(nameTextArea);
 		  panel1.add(portTextArea);
+		  panel1.add(localhostTextArea);
 		  playButton = new JButton("Play");
 		  playButton.addActionListener(this);
-		  playButton.setBounds(410, 460, 70, 23);
+		  playButton.setBounds(410, 490, 70, 23);
 		  panel1.add(playButton);  //ADD TO THE PANEL
 		  menuButton = new JButton("How to Play");
 		  menuButton.addActionListener(this);
-		  menuButton.setBounds(490, 460, 100, 23);
+		  menuButton.setBounds(490, 490, 100, 23);
 		  panel1.add(menuButton);
 	 }
 	
@@ -118,6 +138,10 @@ public class VGMainFrame extends JFrame implements ActionListener{
 	  public String getAddress() {
 		    return portTextArea.getText();
 		}
+	  
+	  public String getLocalhost() {
+		    return localhostTextArea.getText();
+		}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -125,10 +149,11 @@ public class VGMainFrame extends JFrame implements ActionListener{
 			
 			 name = getPlayerName();
 			 ipAddress = getAddress();
+			 localhost = getLocalhost();
 			 
-			 VGPlayerSingleton.getInstance().setStats(name, ipAddress);
+			 VGPlayerSingleton.getInstance().setStats(name, ipAddress, localhost);
 			 
-			 if((nameTextArea.getText().trim().length() == 0 || portTextArea.getText().trim().length() == 0) || (nameTextArea.getText().equals(initialNameText) || portTextArea.getText().equals(initialIPText)))
+			 if((nameTextArea.getText().trim().length() == 0 || portTextArea.getText().trim().length() == 0 || localhostTextArea.getText().trim().length() == 0) || (nameTextArea.getText().equals(initialNameText) || portTextArea.getText().equals(initialIPText)))
 			 {
 				JOptionPane.showMessageDialog(this,  "Kindly fill out the empty boxes.", "Error", JOptionPane.WARNING_MESSAGE);	
 			 }

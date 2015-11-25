@@ -26,7 +26,7 @@ public class VGClientUDP {
 		 System.out.println("FROM CLIENT");
 		 DatagramSocket clientSocket = new DatagramSocket(9876);   
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
-		 InetAddress playerIPAddress2 = InetAddress.getByName("192.168.10.12");
+		 InetAddress playerIPAddress2 = InetAddress.getByName(VGPlayerSingleton.getInstance().getLocalhost());
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
 	     data = getTheDataFromTheClient(playerIPAddress2.toString());
