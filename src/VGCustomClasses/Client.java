@@ -63,7 +63,7 @@ public class Client {
 		return clientGold;
 	}
 	
-	public int[][] getPositinValue()
+	public int[][] getPositionValue()
 	{
 		return clientPositionValue;
 	}

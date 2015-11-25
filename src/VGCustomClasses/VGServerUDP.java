@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import VGFrames.VGGameFrame;
-import VGFrames.VGMainFrame;
-
 import java.io.*; import java.net.*; 
 
 public class VGServerUDP {   
@@ -19,7 +17,7 @@ public class VGServerUDP {
 		     
 		 byte[] receiveData = new byte[1024];             
 		 byte[] sendData = new byte[1024];  
-		 //byte[] attackerData = new byte[1024];
+
 
 		 byte[] receiveData1 = new byte[1024];             
 		 byte[] sendData1 = new byte[1024];     
@@ -45,8 +43,6 @@ public class VGServerUDP {
 						 System.out.println("IP: "+playerIPAddress);
 						 
 						 int port = receivePacket.getPort();                   
-						 
-						 System.out.println("Port: "+port);
 						 
 						 //openNewFrame("Jolly");
 						 
@@ -79,8 +75,10 @@ public class VGServerUDP {
 								 
 							 }
 							  int[] attackerTroop = new int[8];
-							  int[][] defenderPosition = new int[10][10];							
+							  int[][] defenderTroopInPosition = new int[10][10];
+							
 							 attackerTroop = clientList.get(attackerIndex).getClientTroopCount();
+							
 							 String troopData="";
 							   
 							 for(int m=0; m<8; m++)
@@ -88,51 +86,40 @@ public class VGServerUDP {
 								 troopData = troopData + attackerTroop[m]+",";
 							 }
 							 
-						
-							 
-							/* for(int i=0; i<10; i++)
-							 {
-								 for(int j=0; j<10;j++)
-								 {
-									 
-								 }
-							 }*/
-							 
 							 //find the one not the attacker
 							 
 							 while(true)
 							 {
 								
-								enemyIndex = (new Random()).nextInt(clientList.size());
+								enemyIndex = (new Random()).nextInt(clientList.size()) + 1;
 								
 								if(enemyIndex != attackerIndex)
 									break;
 										 
 							 }
 							 
-							 defenderPosition = clientList.get(enemyIndex).getPositinValue();
+							 byte[] defenderTroopPositionData = new byte[1024];
 							 
-							 System.out.println("Attacker: "+clientList.get(attackerIndex).getClientName());
-							 System.out.println("Enemy: "+clientList.get(enemyIndex).getClientName());
+							 String sentence1 = "";
+							
+							 for(int i=0; i<10; i++){
+								// sentence1 = sentence1+"/";
+								 for(int j=0; j<10; j++){
+									   sentence1 = sentence1 +(Integer.toString(defenderTroopInPosition[i][j]))+",";
+								 }
+								 sentence1 = sentence1+"/";
+							 }
 							 
+							// sentence = sentence + sentence1;
 							 
-							 //send data
-							 
-							 System.out.println("ip address: "+IPAddress.toString());
-							 
+							 defenderTroopInPosition = clientList.get(enemyIndex).getPositionValue();
+							 //send the troopInPosition of the defender data
 							 InetAddress IPAddress2 = InetAddress.getByName(clientList.get(enemyIndex).getIPAddress());
-							 
-							 System.out.println("ip address 2: "+IPAddress2.toString());
-							 
-							 byte[] attackerData = new byte[1024];
-							 
-							 attackerData = troopData.getBytes();                   
-							 DatagramPacket sendPacket1 = new DatagramPacket(attackerData, attackerData.length,IPAddress2, port);                  
+							 defenderTroopPositionData = sentence1.getBytes();                   
+							 DatagramPacket sendPacket1 = new DatagramPacket(defenderTroopPositionData,defenderTroopPositionData.length,IPAddress, port);                  
 							 serverSocket.send(sendPacket1); 
 							 playerMove = 0;
 							 
-							 
-							 //openNewFrame();
 						 }
 					
 				} 
@@ -142,13 +129,10 @@ public class VGServerUDP {
 
 	
 
-     public static void openNewFrame()
+     public static void openNewFrame(String name)
      {
-    	 
-
- 		//VGMainFrame vgMainFrame = new VGMainFrame();
     	
-    	 //VGGameFrame vgObject = new VGGameFrame(name, "port");
+    	 VGGameFrame vgObject = new VGGameFrame(name, "port");
      }
 	
      
@@ -244,7 +228,7 @@ public class VGServerUDP {
 					  		   System.out.println();
 					  	   }
 					  	   
-					  	 //String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue
+					  	 
 					  	 clientList.add(new Client(pName, levelNumber, troopCount, playerGold, positionValue, sentence, clientIP));
 					  	// setMove(move);
 		  	   }

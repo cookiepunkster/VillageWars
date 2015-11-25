@@ -54,9 +54,37 @@ public class VGClientUDP {
 		 clientSocket.send(sendPacket);       
 		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
 		 clientSocket.receive(receivePacket);       
-	     String modifiedSentence = new String(receivePacket.getData());      
+	     String modifiedSentence = new String(receivePacket.getData()); 
+	     parseThedefenderTroopInPosition(modifiedSentence);
 	     System.out.println("FROM SERVER:(Attack)" + modifiedSentence);              
 	     clientSocket.close(); 
+	}
+	
+	public void parseThedefenderTroopInPosition(String receivedTroopInPosition)
+	{
+		 int[][] defenderPositionValue = new int[10][10];
+		 
+		   String[] positionPer10 = receivedTroopInPosition.split("/");
+	  	   String[] positionArray = new String[positionPer10.length];
+	  	   for(int n=0; n< positionPer10.length; n++)
+	  	   {
+	  		   String rowArray = positionPer10[n];
+	  		    positionArray[n] = rowArray;
+	  	   }
+	  	   
+	  	   
+	  	 //SEPARATE them
+	  	   for(int i=0; i<positionArray.length; i++)
+	  	   {
+	  		   String[] perArray = positionArray[i].split(",");
+	  		   int[][] valueInArray = new int[positionArray.length][perArray.length];
+	  		 
+	  		   for(int j=0; j<perArray.length-1; j++ )
+	  		   {
+	  			   defenderPositionValue[i][j] = Integer.parseInt(perArray[j]);
+	  		   }
+	  	   }
+	
 	}
 /*	public void sendHitCount() throws IOException{
 		
