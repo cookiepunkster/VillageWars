@@ -107,13 +107,12 @@ public class VGClientUDP {
 		
 		hitCount = VGPlayerSingleton.getInstance().getHitCount();
 		String attackerName = VGPlayerSingleton.getInstance().getPlayerName();
-		String hitCountString = Integer.toString(VGPlayerSingleton.getInstance().getHitCount());
 		 System.out.println("FROM CLIENT: (HIT COUNT)");
 		 DatagramSocket clientSocket = new DatagramSocket();   
 		 InetAddress IPAddress = InetAddress.getByName(VGPlayerSingleton.getInstance().getIPaddress());  
 		 byte[] sendData = new byte[1024];       
 		 byte[] receiveData = new byte[1024];   
-	     data2 = "sendHitCount"+"_"+attackerName+"_"+hitCountString;
+	     data2 = "sendHitCount"+"_"+attackerName+"_"+Integer.toString(VGPlayerSingleton.getInstance().getHitCount());
 	     sendData = data2.getBytes();       
 		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
 		 clientSocket.send(sendPacket);       
