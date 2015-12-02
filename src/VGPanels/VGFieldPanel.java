@@ -106,12 +106,12 @@ public class VGFieldPanel extends JPanel {
 				if(seconds==0){
 				((Timer)e.getSource()).stop();
 					System.out.println("timer stop!");
-						/*    try {
+						    try {
 								clientUDP.sendHitCount();
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
-							}*/
+							}
 					//printVisitedArray();
 				}else{
 				seconds--;

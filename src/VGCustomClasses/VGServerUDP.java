@@ -15,6 +15,7 @@ public class VGServerUDP {
 	static String playerIPAddress;
 	static int numberOfClients = 0;
 	static int attackerHit = 0;
+	
 	public static void main(String args[]) throws IOException {
 		     
 		 byte[] receiveData = new byte[1024];             
@@ -93,7 +94,7 @@ public class VGServerUDP {
 							 while(true)
 							 {
 								
-								enemyIndex = (new Random()).nextInt(clientList.size()) + 1;
+								enemyIndex = (new Random()).nextInt(clientList.size()) + 0;
 								
 								if(enemyIndex != attackerIndex)
 									break;
@@ -101,6 +102,8 @@ public class VGServerUDP {
 							 }
 							 
 							 byte[] defenderTroopPositionData = new byte[1024];
+							 
+							 System.out.println("Enemy: "+clientList.get(enemyIndex).getClientName());
 							 
 							 String sentence1 = "";
 							 defenderTroopInPosition = clientList.get(enemyIndex).getPositionValue();
@@ -245,7 +248,7 @@ public class VGServerUDP {
 					  	   
 					  	
 					  	   //SEPARATE them
-					  	   for(int i=0; i<positionArray.length; i++)
+					  	   for(int i=0; i<positionArray.length-1; i++)
 					  	   {
 					  		   String[] perArray = positionArray[i].split(",");
 					  		   int[][] valueInArray = new int[positionArray.length][perArray.length];
@@ -277,12 +280,14 @@ public class VGServerUDP {
 		  		    setAttackerIPaddress(playerIPAddress);		 
 		     	 }
 		  	  
-		  	   else{  // move is attack
+		  	   else{  // move is send hit count
 		  		   String attackerName;
-		  		    int hitCount;
+		  		    int hitCount = 0;
 		  		 
 		  		    playerMove = 3;
 		  		    attackerName = dataFromClient[1];
+		  		    System.out.println("attacker name: "+attackerName);
+		  		    System.out.println("data: "+dataFromClient[2]);
 		  		    hitCount = Integer.parseInt(dataFromClient[2]);
 		  		    hitCountList.add(new HitCount(attackerName, hitCount));
 		  		    attackerHit++;

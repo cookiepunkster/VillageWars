@@ -160,6 +160,14 @@ public class VGServerClass {
 			
 			while(keepgoing) {
 				
+long startTime = System.currentTimeMillis();
+				
+				System.out.println("Start time: "+startTime);
+				
+				long endTime = System.currentTimeMillis();
+				
+				System.out.println("End time: "+endTime);
+				
 				try {
 					cm = (ChatMessage) sInput.readObject();
 				} catch (IOException e) {
@@ -179,7 +187,6 @@ public class VGServerClass {
 						System.out.println(username + "");
 						break;
 					}
-				
 				
 			}
 			

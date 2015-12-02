@@ -51,7 +51,7 @@ public class VGServerGUI extends JFrame implements ActionListener {
 		
 		JPanel panelForUDP = new JPanel(new GridLayout(1,1));
 		
-		UDPstatus = new JTextArea("Status for UDP.\n\n",80,80);
+		UDPstatus = new JTextArea("\n\n",80,80);
 		UDPstatus.setEditable(false);
 		panelForUDP.add(new JScrollPane(UDPstatus));
 		
@@ -88,7 +88,7 @@ public class VGServerGUI extends JFrame implements ActionListener {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		
 		String event = sdf.format(new Date()) + " :: " + str;
-		TCPstatus.append(str);
+		TCPstatus.append(event);
 		
 	}
 	
@@ -125,6 +125,8 @@ public class VGServerGUI extends JFrame implements ActionListener {
 		
 		server = new VGServerClass(1500, this);
 		new ServerRunning().start();
+
+		//new VGServerUDP();
 		
 	}
 	
