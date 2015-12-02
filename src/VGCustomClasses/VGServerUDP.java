@@ -1,8 +1,13 @@
 package VGCustomClasses;
+import java.awt.BorderLayout;
 import java.io.*; 
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import VGFrames.VGGameFrame;
 import java.io.*; import java.net.*; 
@@ -43,6 +48,10 @@ public class VGServerUDP {
 						 
 						 InetAddress IPAddress = receivePacket.getAddress();    
 						 playerIPAddress = receivePacket.getAddress().toString().replace("/", "");
+					     IPList.add(new IPAddress(playerIPAddress));
+						 if(IPList.size() > 1){
+							  openNewFrame();
+						  }
 						 
 						 System.out.println("IP: "+playerIPAddress);
 						 
@@ -187,10 +196,29 @@ public class VGServerUDP {
 
 	
 
-     public static void openNewFrame(String name)
+     public static void openNewFrame()
      {
     	
-    	 VGGameFrame vgObject = new VGGameFrame(name, "port");
+          JFrame mainFrame = new JFrame();
+    	  mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          mainFrame.setSize(200,100);
+          mainFrame.setLayout(new BorderLayout());
+          mainFrame.setVisible(true);
+          mainFrame.setResizable( false );
+          mainFrame.setLocationRelativeTo(null);
+          JPanel panel1 = new JPanel();
+      	   JTextArea textArea = new JTextArea();
+      	   panel1.add(textArea);
+      	   mainFrame.add(panel1);
+      	   
+      	  String ipAdd = "";
+ 		  for(int i=0; i< IPList.size(); i++){
+ 			ipAdd = IPList.get(i).getIPClient();
+ 			textArea.append(ipAdd+" ");
+ 			
+ 		}
+          
+        
      }
 	
      

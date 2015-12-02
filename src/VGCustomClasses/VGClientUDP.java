@@ -41,29 +41,7 @@ public class VGClientUDP {
 	     clientSocket.close();    
 	    
 	}
-	
 
-	public void loadTester() throws IOException{
-		int y;
-		//monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
-	//	String countPerTroop;
-		System.out.println("FROM CLIENT");
-		 DatagramSocket clientSocket = new DatagramSocket(9876);   
-		 InetAddress IPAddress = InetAddress.getByName(LoadTesterInput.getAddress());
-		// InetAddress playerIPAddress2 = InetAddress.getByName(VGPlayerSingleton.getInstance().getLocalhost());
-		 byte[] sendData = new byte[1024];       
-		 byte[] receiveData = new byte[1024];   
-	     data3 = sendLoadTesterData();
-	     sendData = data3.getBytes();       
-		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
-		 clientSocket.send(sendPacket);       
-		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
-		 clientSocket.receive(receivePacket);       
-	     String modifiedSentence = new String(receivePacket.getData());      
-	  //   System.out.println("FROM SERVER:" + modifiedSentence);              
-	     clientSocket.close();    
-	    
-	}
 	
 	public void cAttack() throws IOException{
 		int y;
@@ -206,4 +184,28 @@ public class VGClientUDP {
 		 return sentence;
 		 
 	}
+
+
+	public void loadTester() throws IOException{
+		int y;
+		//monsterPerCount = VGPlayerSingleton.getInstance().getPlayerTroops();
+	//	String countPerTroop;
+		System.out.println("FROM CLIENT");
+		 DatagramSocket clientSocket = new DatagramSocket(9876);   
+		 InetAddress IPAddress = InetAddress.getByName(LoadTesterInput.getAddress());
+		// InetAddress playerIPAddress2 = InetAddress.getByName(VGPlayerSingleton.getInstance().getLocalhost());
+		 byte[] sendData = new byte[1024];       
+		 byte[] receiveData = new byte[1024];   
+	     data3 = sendLoadTesterData();
+	     sendData = data3.getBytes();       
+		 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);       
+		 clientSocket.send(sendPacket);       
+		 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);     
+		 clientSocket.receive(receivePacket);       
+	     String modifiedSentence = new String(receivePacket.getData());      
+	  //   System.out.println("FROM SERVER:" + modifiedSentence);              
+	     clientSocket.close();    
+	    
+	} 
+	
  } 

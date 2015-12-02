@@ -8,10 +8,10 @@ public class IPAddress {
 			  this.IP = IPAddress;
 		}
 		
-		
-		
 		public String getIPClient()
 		{
 			return IP;
 		}
+		
 }
+
