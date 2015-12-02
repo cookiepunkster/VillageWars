@@ -9,10 +9,10 @@ public class Client {
 	private int[][] clientPositionValue = new int[10][10];
 	private String playerIPAddress;
 	private String sentence;
-	
-	public Client()
+	public int clientNo;
+	public Client(int i)
 	{
-		
+		this.clientNo = i;
 	}
 
 	public Client(String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue , String sentence, String playerIPAddress ){
