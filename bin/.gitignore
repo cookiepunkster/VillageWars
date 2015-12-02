@@ -1,7 +1,9 @@
-/VGCustomClasses/
+/.classpath
+/.project
 /VGFrames/
-/VGMainFile/
 /VGPanels/
+/VGCustomClasses/
+/VGMainFile/
 /VGServer/
 /VGSingletons/
 /VGTCPChatSystem/

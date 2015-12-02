@@ -9,6 +9,7 @@ import java.io.*; import java.net.*;
 
 public class VGServerUDP {   
 	static ArrayList<Client> clientList = new ArrayList<Client>();
+	static ArrayList<IPAddress> IPList = new ArrayList<IPAddress>();
 	static ArrayList<HitCount> hitCountList = new ArrayList<HitCount>();
 	static int playerMove;
 	static String attackerIPAddress;
@@ -127,7 +128,7 @@ public class VGServerUDP {
 							 
 						 }
 						 
-						 else{  //playerMove == 3
+						 else if(playerMove == 3){  //playerMove == 3
 							 byte[] winnerName = new byte[1024];
 							 String clientName = "";
 							 int max = 0;
@@ -166,6 +167,17 @@ public class VGServerUDP {
 						
 							// max = 0;
 							 playerMove = 0;
+						 }
+						 
+						   
+					  	 else{  //playerMove = 0   //load
+							 String loadTrial = "Load Tester Data Received";
+							 System.out.println("Load tester IP Address"+playerIPAddress);
+							 byte[] loadTesterData = new byte[1024];
+							 loadTesterData = loadTrial.getBytes(); 
+							 DatagramPacket sendPacket3 = new DatagramPacket(loadTesterData,loadTesterData.length,IPAddress, port);                  
+							 serverSocket.send(sendPacket3); 
+							
 						 }
 					
 				} 
@@ -280,7 +292,7 @@ public class VGServerUDP {
 		  		    setAttackerIPaddress(playerIPAddress);		 
 		     	 }
 		  	  
-		  	   else{  // move is send hit count
+		  	   else if(move.equals("sendHitCount")){  // move is send hit count
 		  		   String attackerName;
 		  		    int hitCount = 0;
 		  		 
@@ -292,6 +304,13 @@ public class VGServerUDP {
 		  		    hitCountList.add(new HitCount(attackerName, hitCount));
 		  		    attackerHit++;
 		  	   }
+		  	   
+		  	 else{  //load_tester // load 
+		  		   String sendPacket;
+		  		   playerMove = 4;
+		  		   sendPacket = dataFromClient[1];
+		  	   }
+		  	
      }
      
      public static void setAttackerIPaddress(String playerIPAddress)

@@ -102,6 +102,7 @@ public class VGClientUDP {
 	
 	}
 	
+
 	
 	public void sendHitCount() throws IOException{
 		
