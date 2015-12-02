@@ -3,7 +3,6 @@ package VGCustomClasses;
 public class Client {
 	//Store pName, levelNumber, troopCount[], playerGold, positionValue[][] 
 	private String clientName;
-	private int clientNo;
 	private int clientLevelNo;
 	private int[] clientTroopCount = new int[8];
 	private int clientGold;
@@ -11,11 +10,10 @@ public class Client {
 	private String playerIPAddress;
 	private String sentence;
 	
-	public Client(int i)
+	public Client()
 	{
-		this.clientNo = i;
+		
 	}
-	
 
 	public Client(String name, int levelNumber, int[] troopCount, int playerGold, int[][] positionValue , String sentence, String playerIPAddress ){
 		this.clientName = name;
