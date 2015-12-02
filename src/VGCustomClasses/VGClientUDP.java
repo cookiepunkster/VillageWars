@@ -2,10 +2,12 @@ package VGCustomClasses;
 
 import java.io.*; 
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Arrays; 
 import VGSingletons.*;
 
 public class VGClientUDP {   
+	static ArrayList<Client> clientList = new ArrayList<Client>();
 	String data;
 	String data1;
 	String data2;
@@ -128,7 +130,9 @@ public class VGClientUDP {
 	}
 	
 	public String sendLoadTesterData(){
-		String sentence = "load"+"_"+"load tester";
+		String sentence = "load"+"_"+"Lorem Ipsum";
+		for(int i = 0; i<1000; i++)
+		clientList.add(new Client(i));
 		return sentence;
 	}
 	
